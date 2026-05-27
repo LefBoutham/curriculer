@@ -51,43 +51,49 @@ Should practice be recall, coding, writing, problem solving, or mixed?
 
 Recommended answer: match practice to the final course outcome.
 
-### 7. Flashcard Style
+### 7. Exercise Style
+
+What should section exercises ask the learner to produce?
+
+Recommended answer: require a concrete answer, command, explanation, artifact, or solution that proves the learner can apply the lesson material.
+
+### 8. Flashcard Style
 
 Should flashcards test definitions, distinctions, procedures, examples, or mistakes?
 
 Recommended answer: prefer distinctions, procedures, and mistake correction over bare definitions.
 
-### 8. Quiz Style
+### 9. Quiz Style
 
 Should quizzes be multiple choice, short answer, scenario-based, or artifact-based?
 
 Recommended answer: use scenario-based questions when the course teaches applied skills.
 
-### 9. Review Cadence
+### 10. Review Cadence
 
 Should the default spaced repetition schedule be changed?
 
 Recommended answer: keep the default unless the material is especially dense or high stakes.
 
-### 10. Source Policy
+### 11. Source Policy
 
 What source material should the course trust?
 
 Recommended answer: list canonical sources and mark generated explanations as secondary.
 
-### 11. Completion Standard
+### 12. Completion Standard
 
 What counts as finishing a section?
 
-Recommended answer: the learner can explain the key ideas and pass the quiz without substantial hints.
+Recommended answer: the learner can explain the key ideas, complete the exercises, and pass the quiz without substantial hints.
 
-### 12. Maintenance Rule
+### 13. Maintenance Rule
 
 When should the course be revised?
 
 Recommended answer: revise when a source changes, the learner repeatedly misses the same idea, or the course language becomes ambiguous.
 
-### 13. Glossary Rule
+### 14. Glossary Rule
 
 Which terms deserve glossary notes?
 

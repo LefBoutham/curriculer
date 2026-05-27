@@ -11,6 +11,7 @@ This repository is a public base for Markdown-first, LLM-assisted course workspa
   - `CONTEXT.md` for course language, scope, and decisions.
   - `00 Curriculum Index.md` as the course map.
   - Numbered section folders such as `01 Foundations`.
+  - Section-level `exercises/Exercises.md`.
   - Section-level `flashcards/Flashcards.md`.
   - Section-level `quizes/Quiz.md` and `quizes/Quiz.html`.
   - `Glossary/00 Glossary Index.md` when learner-facing terms need stable definitions.
@@ -42,5 +43,5 @@ General rules:
 - Prefer Markdown and simple embedded HTML.
 - Keep quiz HTML self-contained.
 - Preserve the existing folder spelling `quizes` unless the user asks to rename it.
-- Use YAML frontmatter on study sets and quizzes when adding review metadata.
-- Update `last_reviewed`, `next_review`, `review_count`, `confidence`, and status manually when the learner reports study performance.
+- Use YAML frontmatter on exercises, study sets, and quizzes when adding review metadata.
+- Have the LLM update `last_reviewed`, `next_review`, `review_count`, `confidence`, and status directly when the learner reports study performance.

@@ -9,9 +9,9 @@ The core idea is that a course should start from a reusable scaffold, then grow 
 - `_Course Scaffold/`: a reusable course template.
 - Course-level `CONTEXT.md` for shared language, scope, and decisions.
 - `00 Curriculum Index.md` as the course map.
-- Section folders for lessons, flashcards, quizzes, and review metadata.
+- Section folders for lessons, exercises, flashcards, quizzes, and review metadata.
 - `_attachments/` for source material such as PDFs, screenshots, notes, datasets, and examples.
-- LLM-facing conventions for active recall, spaced review, quizzes, glossary terms, and incremental curriculum growth.
+- LLM-facing conventions for active recall, spaced review, exercises, quizzes, glossary terms, and incremental curriculum growth.
 
 ## Principles
 
@@ -40,7 +40,7 @@ The agent workflow conventions also take inspiration from Matt Pocock's [skills]
 3. Define the outcome, learner, boundaries, section plan, and source policy.
 4. Update `CONTEXT.md` as the course language becomes clear.
 5. Replace `01 Section Template/` with real numbered sections.
-6. Add lessons, flashcards, quizzes, glossary notes, and source attachments as the course develops.
+6. Add lessons, exercises, flashcards, quizzes, glossary notes, and source attachments as the course develops.
 
 ## Learning Model
 

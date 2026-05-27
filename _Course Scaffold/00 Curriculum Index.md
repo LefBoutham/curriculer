@@ -5,10 +5,11 @@ One-sentence description of the course outcome.
 ## How To Use This Course
 
 1. Study the lesson notes in order.
-2. Review the section flashcards.
-3. Take the section quiz.
-4. Ask an LLM to update review metadata.
-5. Revisit sections when `next_review` is due.
+2. Complete the section exercises.
+3. Review the section flashcards.
+4. Take the section quiz.
+5. Ask an LLM to update lesson progress and review metadata.
+6. Revisit sections when `next_review` is due.
 
 ## Sections
 

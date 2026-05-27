@@ -8,6 +8,7 @@ Describe the outcome of this section in one sentence.
 
 ## Study
 
+- [[exercises/Exercises|Exercises]]
 - [[flashcards/Flashcards|Flashcards]]
 - [[quizes/Quiz|Quiz]]
 

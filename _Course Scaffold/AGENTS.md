@@ -4,7 +4,7 @@ This folder is an Obsidian course scaffold. It is meant to be copied, renamed, a
 
 ## Mission
 
-Help the learner build and study a coherent course. Preserve the course language in `CONTEXT.md`, generate useful lesson material, and keep flashcards/quizzes aligned with the actual curriculum.
+Help the learner build and study a coherent course. Preserve the course language in `CONTEXT.md`, generate useful lesson material, and keep exercises, flashcards, and quizzes aligned with the actual curriculum.
 
 ## Required Context Files
 
@@ -18,6 +18,7 @@ Help the learner build and study a coherent course. Preserve the course language
 - `Glossary/00 Glossary Index.md` is the learner-facing term index.
 - Numbered folders are course sections.
 - Each numbered section should contain lesson notes plus:
+  - `exercises/Exercises.md`
   - `flashcards/Flashcards.md`
   - `quizes/Quiz.md`
   - `quizes/Quiz.html`
@@ -80,11 +81,29 @@ When a lesson has been covered in a study session:
 - Set `last_studied` to today's date in `YYYY-MM-DD`.
 - Increment `study_count` by 1.
 
-Use lesson progress metadata to find the learner's most recent checkpoint. Keep spaced repetition scheduling on flashcards and quizzes unless the learner asks for per-lesson review scheduling.
+The LLM should update lesson progress frontmatter directly at the end of a study session when the learner has gone through the lesson. This progress update is separate from exercise, flashcard, or quiz review scheduling.
+
+Use lesson progress metadata to find the learner's most recent checkpoint. Keep spaced repetition scheduling on exercises, flashcards, and quizzes unless the learner asks for per-lesson review scheduling.
 
 ## Spaced Repetition Metadata
 
-Use YAML frontmatter on study-set notes. Prefer section-level tracking over per-card tracking unless the user asks for granularity.
+Use YAML frontmatter on reviewable study notes. Prefer section-level tracking over per-card or per-exercise tracking unless the user asks for granularity.
+
+Exercise frontmatter:
+
+```yaml
+---
+type: exercises
+course: COURSE_NAME
+section: "01 Section Name"
+status: not started
+last_reviewed:
+next_review:
+review_count: 0
+confidence: 0
+notes:
+---
+```
 
 Flashcard frontmatter:
 
@@ -129,7 +148,7 @@ Allowed `status` values:
 
 ## Review Rules
 
-When the learner reports performance, update frontmatter manually.
+When the learner reports performance, the LLM should update review frontmatter directly.
 
 - `confidence: 0` or `1`: `status: needs practice`, review tomorrow
 - `confidence: 2` or `3`: `status: needs review`, review in 3 days
@@ -159,6 +178,17 @@ Answer.
 ```
 
 Prefer recall prompts over recognition prompts. A weak prompt asks "What is X?" A stronger prompt asks the learner to distinguish X from a nearby concept or apply X in a small scenario.
+
+## Exercises
+
+Use exercises for applied practice that proves the learner can do the work without just recognizing an answer. Keep one section-level `exercises/Exercises.md` by default.
+
+Exercise files should:
+
+- include setup or prerequisites when needed
+- ask the learner to produce an answer, command, explanation, artifact, or solution
+- include answer blocks or checks where useful
+- stay scoped to the section unless intentionally reviewing older material
 
 ## Quizzes
 

@@ -9,7 +9,7 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 - An `AGENTS.md` file that tells future LLMs how to work inside the course.
 - An empty `Glossary/` folder for learner-facing term notes.
 - A grill-with-docs prompt file for clarifying the course before building it.
-- Flashcard and quiz templates with spaced repetition frontmatter.
+- Exercise, flashcard, and quiz templates with spaced repetition frontmatter.
 - A Dataview-friendly review dashboard.
 
 ## Suggested Setup Flow
@@ -21,7 +21,7 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 5. Update `CONTEXT.md` as terms and boundaries become clear.
 6. Add glossary terms only when requested or when a term needs a stable learner-facing definition.
 7. Replace `01 Section Template` with real numbered sections.
-8. Add lessons, flashcards, and quizzes as the course develops.
+8. Add lessons, exercises, flashcards, and quizzes as the course develops.
 
 ## Naming Convention
 
@@ -37,6 +37,7 @@ Use numbered course sections:
 Inside each numbered section, keep:
 
 ```text
+exercises/Exercises.md
 flashcards/Flashcards.md
 quizes/Quiz.md
 quizes/Quiz.html

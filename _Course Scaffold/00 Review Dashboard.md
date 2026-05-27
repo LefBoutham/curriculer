@@ -7,7 +7,7 @@ Use this dashboard with the Dataview plugin.
 ```dataview
 TABLE status, last_reviewed, next_review, review_count, confidence, notes
 FROM "COURSE_NAME"
-WHERE (type = "study-set" OR type = "quiz") AND next_review <= date(today)
+WHERE (type = "exercises" OR type = "study-set" OR type = "quiz") AND next_review <= date(today)
 SORT next_review ASC
 ```
 
@@ -30,11 +30,11 @@ WHERE study_status != "studied" AND order
 SORT order ASC
 ```
 
-## All Study Sets
+## All Reviewable Sets
 
 ```dataview
 TABLE status, last_reviewed, next_review, review_count, confidence
 FROM "COURSE_NAME"
-WHERE type = "study-set" OR type = "quiz"
+WHERE type = "exercises" OR type = "study-set" OR type = "quiz"
 SORT section ASC, type ASC
 ```
