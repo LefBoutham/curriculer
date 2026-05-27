@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 Section Template Quiz</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #f8fafc; --fg: #172033; --muted: #667085; --panel: #ffffff; --line: #d9e2ec; --accent: #0f766e; --bad: #b42318; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #111827; --fg: #e5e7eb; --muted: #9ca3af; --panel: #1f2937; --line: #374151; --accent: #2dd4bf; --bad: #f87171; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--fg); }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 28px; margin: 0 0 6px; }
+    p { color: var(--muted); margin: 0 0 24px; }
+    .question { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 18px; margin: 14px 0; }
+    .question h2 { font-size: 17px; margin: 0 0 12px; }
+    label { display: block; padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px; margin: 8px 0; cursor: pointer; }
+    label:has(input:checked) { border-color: var(--accent); }
+    button { appearance: none; border: 0; border-radius: 6px; padding: 10px 14px; background: var(--accent); color: white; font-weight: 650; cursor: pointer; margin-top: 18px; }
+    #result { margin-top: 16px; font-weight: 700; color: var(--accent); }
+    .missed { color: var(--bad); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>01 Section Template Quiz</h1>
+    <p>Replace these placeholder questions with section-specific checks.</p>
+    <form id="quiz"></form>
+    <button type="button" id="grade">Grade quiz</button>
+    <div id="result" aria-live="polite"></div>
+  </main>
+  <script>
+    const questions = [
+      {
+        q: "What should a strong lesson in this course focus on?",
+        a: 1,
+        choices: [
+          "As many related concepts as possible",
+          "One concept, operation, or skill",
+          "Only external links"
+        ]
+      },
+      {
+        q: "What should happen after a study session?",
+        a: 2,
+        choices: [
+          "Delete completed flashcards",
+          "Move the section to an archive",
+          "Update review metadata"
+        ]
+      }
+    ];
+
+    const form = document.querySelector("#quiz");
+    form.innerHTML = questions.map(function(question, qi) {
+      const choices = question.choices.map(function(choice, ci) {
+        return '<label><input type="radio" name="q' + qi + '" value="' + ci + '"> ' + escapeHtml(choice) + '</label>';
+      }).join("");
+      return '<section class="question"><h2>' + (qi + 1) + ". " + escapeHtml(question.q) + "</h2>" + choices + "</section>";
+    }).join("");
+
+    document.querySelector("#grade").addEventListener("click", function() {
+      let score = 0;
+      const missed = [];
+      questions.forEach(function(question, qi) {
+        const selected = form.querySelector('input[name="q' + qi + '"]:checked');
+        if (selected && Number(selected.value) === question.a) score += 1;
+        else missed.push(qi + 1);
+      });
+      const result = document.querySelector("#result");
+      result.textContent = "Score: " + score + " / " + questions.length + (missed.length ? " - Review question " + missed.join(", ") : "");
+      result.className = missed.length ? "missed" : "";
+    });
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, function(ch) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+      });
+    }
+  </script>
+</body>
+</html>

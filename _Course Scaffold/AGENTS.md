@@ -1,0 +1,191 @@
+# Course Agent Instructions
+
+This folder is an Obsidian course scaffold. It is meant to be copied, renamed, and filled in for a specific course.
+
+## Mission
+
+Help the learner build and study a coherent course. Preserve the course language in `CONTEXT.md`, generate useful lesson material, and keep flashcards/quizzes aligned with the actual curriculum.
+
+## Required Context Files
+
+- Read `CONTEXT.md` before making structural or terminology changes.
+- Use `00 Course Setup Grill.md` when the course direction is unclear.
+- Use `docs/adr/` only for hard-to-reverse, surprising, trade-off-driven decisions.
+
+## Course Structure
+
+- `00 Curriculum Index.md` is the course map.
+- `Glossary/00 Glossary Index.md` is the learner-facing term index.
+- Numbered folders are course sections.
+- Each numbered section should contain lesson notes plus:
+  - `flashcards/Flashcards.md`
+  - `quizes/Quiz.md`
+  - `quizes/Quiz.html`
+- `_attachments/` is for course assets and source files.
+
+## Glossary
+
+The glossary starts empty. Add terms only when the learner asks for a term to be added or when a term has become important enough to deserve a stable learner-facing definition.
+
+Keep `CONTEXT.md` and `Glossary/` distinct:
+
+- `CONTEXT.md` defines the course-building language and domain boundaries for LLMs.
+- `Glossary/` defines course subject terms for the learner.
+
+When adding a glossary term:
+
+1. Create `Glossary/Term Name.md`.
+2. Add a concise definition at the top.
+3. Add examples, related terms, and source links only when useful.
+4. Add an entry to `Glossary/00 Glossary Index.md` in this format:
+
+```md
+- [[Term Name]] — one-line meaning.
+```
+
+When the learner asks to link a term, update meaningful mentions in course files to point to the glossary note:
+
+```md
+[[Glossary/Term Name|Term Name]]
+```
+
+Do not link every repeated occurrence mechanically. Link the first meaningful occurrence in a section or any occurrence where the learner is likely to want the definition.
+
+## Lesson Progress Metadata
+
+Use lesson frontmatter to track the learner's most recent checkpoint. This is separate from spaced repetition.
+
+Lesson frontmatter:
+
+```yaml
+---
+title: "Lesson Title"
+section: "01 Section Name"
+source:
+order: 1.1
+study_status: not started
+last_studied:
+study_count: 0
+---
+```
+
+Allowed `study_status` values:
+
+- `not started`
+- `studied`
+
+When a lesson has been covered in a study session:
+
+- Set `study_status: studied`.
+- Set `last_studied` to today's date in `YYYY-MM-DD`.
+- Increment `study_count` by 1.
+
+Use lesson progress metadata to find the learner's most recent checkpoint. Keep spaced repetition scheduling on flashcards and quizzes unless the learner asks for per-lesson review scheduling.
+
+## Spaced Repetition Metadata
+
+Use YAML frontmatter on study-set notes. Prefer section-level tracking over per-card tracking unless the user asks for granularity.
+
+Flashcard frontmatter:
+
+```yaml
+---
+type: study-set
+course: COURSE_NAME
+section: "01 Section Name"
+status: not started
+last_reviewed:
+next_review:
+review_count: 0
+confidence: 0
+notes:
+---
+```
+
+Quiz frontmatter:
+
+```yaml
+---
+type: quiz
+course: COURSE_NAME
+section: "01 Section Name"
+status: not started
+last_reviewed:
+next_review:
+review_count: 0
+confidence: 0
+last_score:
+best_score:
+notes:
+---
+```
+
+Allowed `status` values:
+
+- `not started`
+- `needs practice`
+- `needs review`
+- `mastered`
+
+## Review Rules
+
+When the learner reports performance, update frontmatter manually.
+
+- `confidence: 0` or `1`: `status: needs practice`, review tomorrow
+- `confidence: 2` or `3`: `status: needs review`, review in 3 days
+- `confidence: 4`: `status: needs review`, review in 7 days
+- `confidence: 5`: `status: mastered`, review in 14 to 30 days
+
+When updating review metadata:
+
+- Set `last_reviewed` to today's date in `YYYY-MM-DD`.
+- Set `next_review` from the schedule unless the learner asks otherwise.
+- Increment `review_count` by 1.
+- Update `confidence`.
+- For quizzes, update `last_score` and `best_score` when score is known.
+- Keep `notes` short and actionable.
+
+## Flashcards
+
+Use Obsidian-friendly collapsible HTML:
+
+```html
+<details>
+<summary>Question?</summary>
+
+Answer.
+
+</details>
+```
+
+Prefer recall prompts over recognition prompts. A weak prompt asks "What is X?" A stronger prompt asks the learner to distinguish X from a nearby concept or apply X in a small scenario.
+
+## Quizzes
+
+Keep `Quiz.html` self-contained. `Quiz.md` embeds it for Obsidian with:
+
+```html
+<iframe src="Quiz.html" width="100%" height="900"></iframe>
+```
+
+If Obsidian does not render local iframes, the learner can open `Quiz.html` directly.
+
+## Context Discipline
+
+When a term is resolved, update `CONTEXT.md` immediately. Do not batch terminology changes.
+
+Call out ambiguous language:
+
+> You said "module", but `CONTEXT.md` uses **Section** for the top-level course unit. Do you mean **Section** or something smaller?
+
+Keep `CONTEXT.md` about course domain language, not implementation details.
+
+If a learner-facing subject term conflicts with `CONTEXT.md`, resolve the ambiguity before adding or linking the glossary term.
+
+## Editing Guidance
+
+- Keep edits local to the copied course folder.
+- Do not alter the scaffold's intent unless the user is changing the scaffold itself.
+- Prefer Markdown and simple embedded HTML that Obsidian can render.
+- Keep generated quiz HTML self-contained.
+- Preserve the `quizes` folder spelling unless the user asks to rename it.
