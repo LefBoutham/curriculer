@@ -31,6 +31,8 @@ These principles are influenced by cognitive psychology research on active learn
 
 See [Which Cognitive Psychology Findings are Solid, That Can Be Used to Help Students Learn Better?](https://www.justinmath.com/which-cognitive-psychology-findings-are-solid-that-can-be-used-to-help-students-learn-better/) for the broader argument.
 
+The agent workflow conventions also take inspiration from Matt Pocock's [skills](https://github.com/mattpocock/skills) repo, especially the idea that useful agent behavior can be captured as small, composable workflows with shared project language, setup conventions, and explicit review loops.
+
 ## How To Start A Course
 
 1. Copy `_Course Scaffold/` to a new folder named after the course.
