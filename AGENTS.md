@@ -38,6 +38,8 @@ Do not modify `_Course Scaffold/` when creating a normal course. Only change the
 
 Follow the course-level `AGENTS.md` when one exists. If a course does not have one yet, use `_Course Scaffold/AGENTS.md` as the fallback convention.
 
+Use the repo-scoped `course-study-coach` skill for LLM-led study sessions, reviews, exercises, study sets, quizzes, diagnostic starting-point checks, active-recall tutoring, and review metadata updates.
+
 General rules:
 
 - Prefer Markdown and simple embedded HTML.
