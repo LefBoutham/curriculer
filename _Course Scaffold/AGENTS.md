@@ -2,6 +2,8 @@
 
 This folder is an Obsidian course scaffold. It is meant to be copied, renamed, and filled in for a specific course.
 
+Do not record real learner progress in this scaffold folder. Learner `last_reviewed`, `next_review`, `review_count`, `confidence`, `last_studied`, or `study_count` values belong only in copied courses.
+
 ## Mission
 
 Help the learner build and study a coherent course. Preserve the course language in `CONTEXT.md`, generate useful lesson material, and keep exercises, flashcards, and quizzes aligned with the actual curriculum.
@@ -23,6 +25,7 @@ Help the learner build and study a coherent course. Preserve the course language
   - `quizes/Quiz.md`
   - `quizes/Quiz.html`
 - `_attachments/` is for course assets and source files.
+- `_attachments/00 Source Index.md` is for trusted source material.
 
 ## Glossary
 
@@ -64,9 +67,13 @@ title: "Lesson Title"
 section: "01 Section Name"
 source:
 order: 1.1
+type: lesson
 study_status: not started
 last_studied:
 study_count: 0
+prerequisites:
+depends_on:
+mastery_evidence:
 ---
 ```
 
@@ -100,7 +107,7 @@ status: not started
 last_reviewed:
 next_review:
 review_count: 0
-confidence: 0
+confidence:
 notes:
 ---
 ```
@@ -116,7 +123,7 @@ status: not started
 last_reviewed:
 next_review:
 review_count: 0
-confidence: 0
+confidence:
 notes:
 ---
 ```
@@ -132,7 +139,7 @@ status: not started
 last_reviewed:
 next_review:
 review_count: 0
-confidence: 0
+confidence:
 last_score:
 best_score:
 notes:
@@ -146,6 +153,8 @@ Allowed `status` values:
 - `needs review`
 - `mastered`
 
+For `not started` artifacts, `confidence` may be blank. Set numeric confidence only after learner evidence exists.
+
 ## Review Rules
 
 When the learner reports performance, the LLM should update review frontmatter directly.
@@ -154,6 +163,10 @@ When the learner reports performance, the LLM should update review frontmatter d
 - `confidence: 2` or `3`: `status: needs review`, review in 3 days
 - `confidence: 4`: `status: needs review`, review in 7 days
 - `confidence: 5`: `status: mastered`, review in 14 to 30 days
+
+Use reviewable artifact confidence, grouped by section, rather than inventing section-level confidence.
+
+Do not mark an artifact as `mastered` if the learner needed a full explanation. Ask a fresh nearby retrieval prompt first and require clean independent recall or application.
 
 When updating review metadata:
 
@@ -187,18 +200,22 @@ Exercise files should:
 
 - include setup or prerequisites when needed
 - ask the learner to produce an answer, command, explanation, artifact, or solution
-- include answer blocks or checks where useful
+- include portable `<details>` answer blocks or checks where useful
 - stay scoped to the section unless intentionally reviewing older material
+
+Record repeated misses in a short repair log or review notes section with the missed concept, evidence, likely cause, and repair made or proposed.
 
 ## Quizzes
 
 Keep `Quiz.html` self-contained. `Quiz.md` embeds it for Obsidian with:
 
 ```html
-<iframe src="Quiz.html" width="100%" height="900"></iframe>
+<iframe src="Quiz.html" title="Section Quiz" width="100%" height="900"></iframe>
 ```
 
 If Obsidian does not render local iframes, the learner can open `Quiz.html` directly.
+
+Keep a human-readable question inventory in `Quiz.md`; treat `Quiz.html` as a self-contained interactive mirror. Do not add remote scripts, CDNs, analytics, hidden persistence, network calls, minified bundles, or required build steps.
 
 ## Context Discipline
 
@@ -219,3 +236,6 @@ If a learner-facing subject term conflicts with `CONTEXT.md`, resolve the ambigu
 - Prefer Markdown and simple embedded HTML that Obsidian can render.
 - Keep generated quiz HTML self-contained.
 - Preserve the `quizes` folder spelling unless the user asks to rename it.
+- Treat YAML frontmatter as canonical review state. Dataview dashboards are only query helpers.
+- Use Markdown, YAML frontmatter, Obsidian-compatible links, `<details>`, local iframes, and unminified self-contained quiz HTML by default.
+- Require an ADR for databases, hosted services, build steps, opaque generated files, proprietary formats, or remote quiz dependencies.

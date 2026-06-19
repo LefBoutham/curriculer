@@ -5,20 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>01 Section Template Quiz</title>
   <style>
-    :root { color-scheme: light dark; --bg: #f8fafc; --fg: #172033; --muted: #667085; --panel: #ffffff; --line: #d9e2ec; --accent: #0f766e; --bad: #b42318; }
-    @media (prefers-color-scheme: dark) { :root { --bg: #111827; --fg: #e5e7eb; --muted: #9ca3af; --panel: #1f2937; --line: #374151; --accent: #2dd4bf; --bad: #f87171; } }
+    :root { color-scheme: light dark; --bg: #f8fafc; --fg: #172033; --muted: #667085; --panel: #ffffff; --line: #d9e2ec; --accent: #0f766e; --button-bg: #0f766e; --button-fg: #ffffff; --bad: #b42318; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #111827; --fg: #e5e7eb; --muted: #9ca3af; --panel: #1f2937; --line: #374151; --accent: #5eead4; --button-bg: #5eead4; --button-fg: #06201c; --bad: #f87171; } }
     * { box-sizing: border-box; }
     body { margin: 0; font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--fg); }
     main { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
     h1 { font-size: 28px; margin: 0 0 6px; }
     p { color: var(--muted); margin: 0 0 24px; }
-    .question { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 18px; margin: 14px 0; }
-    .question h2 { font-size: 17px; margin: 0 0 12px; }
+    fieldset { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 18px; margin: 14px 0; }
+    legend { font-size: 17px; font-weight: 700; padding: 0 4px; }
     label { display: block; padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px; margin: 8px 0; cursor: pointer; }
     label:has(input:checked) { border-color: var(--accent); }
-    button { appearance: none; border: 0; border-radius: 6px; padding: 10px 14px; background: var(--accent); color: white; font-weight: 650; cursor: pointer; margin-top: 18px; }
+    button { appearance: none; border: 0; border-radius: 6px; padding: 10px 14px; background: var(--button-bg); color: var(--button-fg); font-weight: 650; cursor: pointer; margin-top: 18px; }
     #result { margin-top: 16px; font-weight: 700; color: var(--accent); }
     .missed { color: var(--bad); }
+    #summary { width: 100%; min-height: 96px; margin-top: 12px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px; font: inherit; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
@@ -27,7 +29,8 @@
     <p>Replace these placeholder questions with section-specific checks.</p>
     <form id="quiz"></form>
     <button type="button" id="grade">Grade quiz</button>
-    <div id="result" aria-live="polite"></div>
+    <div id="result" aria-live="polite" tabindex="-1"></div>
+    <textarea id="summary" class="hidden" readonly aria-label="Quiz result summary for review metadata"></textarea>
   </main>
   <script>
     const questions = [
@@ -38,7 +41,8 @@
           "As many related concepts as possible",
           "One concept, operation, or skill",
           "Only external links"
-        ]
+        ],
+        rationale: "Focused lessons keep cognitive load manageable and make practice easier to align."
       },
       {
         q: "What should happen after a study session?",
@@ -47,7 +51,8 @@
           "Delete completed flashcards",
           "Move the section to an archive",
           "Update review metadata"
-        ]
+        ],
+        rationale: "Review metadata makes future study routing visible and portable."
       }
     ];
 
@@ -56,7 +61,7 @@
       const choices = question.choices.map(function(choice, ci) {
         return '<label><input type="radio" name="q' + qi + '" value="' + ci + '"> ' + escapeHtml(choice) + '</label>';
       }).join("");
-      return '<section class="question"><h2>' + (qi + 1) + ". " + escapeHtml(question.q) + "</h2>" + choices + "</section>";
+      return '<fieldset><legend>' + (qi + 1) + ". " + escapeHtml(question.q) + "</legend>" + choices + "</fieldset>";
     }).join("");
 
     document.querySelector("#grade").addEventListener("click", function() {
@@ -70,6 +75,20 @@
       const result = document.querySelector("#result");
       result.textContent = "Score: " + score + " / " + questions.length + (missed.length ? " - Review question " + missed.join(", ") : "");
       result.className = missed.length ? "missed" : "";
+      result.focus();
+
+      const summary = document.querySelector("#summary");
+      const confidence = score === questions.length ? 5 : score === 0 ? 1 : 3;
+      summary.className = "";
+      summary.value = [
+        "Quiz: 01 Section Template Quiz",
+        "Score: " + score + " / " + questions.length,
+        "Suggested confidence: " + confidence,
+        "Missed questions: " + (missed.length ? missed.join(", ") : "none"),
+        "Notes: " + (missed.length ? missed.map(function(index) {
+          return "Q" + index + " - " + questions[index - 1].rationale;
+        }).join("; ") : "Clean recall on placeholder quiz.")
+      ].join("\n");
     });
 
     function escapeHtml(value) {

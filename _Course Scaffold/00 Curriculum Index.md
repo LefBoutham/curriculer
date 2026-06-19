@@ -2,6 +2,17 @@
 
 One-sentence description of the course outcome.
 
+## Course Contract
+
+- **Outcome**:
+- **Target Learner**:
+- **Boundary**:
+- **Source Policy**:
+- **Practice Shape**:
+- **Quiz Style**:
+- **Completion Standard**:
+- **Maintenance Rule**:
+
 ## How To Use This Course
 
 1. Study the lesson notes in order.
@@ -14,6 +25,14 @@ One-sentence description of the course outcome.
 ## Sections
 
 - [[01 Section Template/00 Section Index|01 Section Template]]
+
+## Curriculum Graph
+
+Use this section to make prerequisite structure visible.
+
+| Section | Outcome | Prerequisites | Depends On | Mastery Evidence |
+| --- | --- | --- | --- | --- |
+| 01 Section Template | Section outcome | None | None | Exercise set, study set, quiz |
 
 ## Study Tools
 

@@ -1,6 +1,6 @@
 ---
 name: course-study-coach
-description: Runs LLM-led study sessions for Curriculer course libraries using active recall, spaced review, exercises, study sets, quizzes, hints, and review metadata updates. Use when the learner asks to study, review, be quizzed, continue a course, find where they left off, or practice material from courses in this repository.
+description: Runs LLM-led study sessions for Curriculer course workspaces using active recall, spaced review, exercises, study sets, quizzes, hints, and review metadata updates. Use when the learner asks to study, review, be quizzed, continue a course, find where they left off, or practice material from a copied Curriculer course.
 ---
 
 # Course Study Coach
@@ -13,15 +13,18 @@ The learner must attempt retrieval at least once before receiving clues, explana
 
 1. **Select the course.**
    - Read `00 Courses Index.md`.
+   - If the repository only contains `_Course Scaffold/`, do not start a study session from the scaffold. Ask for the copied course path or offer course setup help.
+   - Never treat `_Course Scaffold/` as learner progress.
    - If the learner did not name a course, list the available courses briefly and ask which one to study.
    - Then read the chosen course's `AGENTS.md` if present; otherwise use `_Course Scaffold/AGENTS.md`.
    - Read the chosen course's `CONTEXT.md` and curriculum index when present.
 
 2. **Find where the learner left off.**
-   - Inspect the course curriculum index, section indexes, lesson frontmatter, review dashboard, and reviewable artifact frontmatter.
+   - Inspect the course curriculum index, section indexes, lesson frontmatter, and reviewable artifact frontmatter.
+   - Treat YAML frontmatter as the source of truth. Use review dashboards only as query hints.
    - Use lesson progress frontmatter as the checkpoint source of truth. Prefer the highest ordered lesson with `study_status: studied` and continue from the next lesson unless the learner asks for review or a different point.
    - Prefer due or overdue reviews before new lessons unless the learner explicitly asks to move forward or stop revision.
-   - If nothing is due, suggest the next incomplete or lowest-confidence section.
+   - If nothing is due, suggest the next incomplete lesson or lowest-confidence reviewable artifact, grouped by section.
    - If the course has weak metadata, state the likely starting point and ask the learner to confirm.
 
 3. **Ground the starting level when uncertain.**
@@ -38,6 +41,7 @@ The learner must attempt retrieval at least once before receiving clues, explana
 4. If the answer is `clean`, acknowledge it briefly without exposing the internal label.
 5. If the answer is not `clean`, use the hint ladder below.
 6. After a hint or explanation, ask a fresh nearby retrieval prompt before marking progress.
+7. When an answer reveals confusion, classify the likely repair path: term confusion, prerequisite gap, weak application, memory decay, or source mismatch.
 
 Prefer short prompts and frequent turns. Avoid long lectures unless the learner has already attempted retrieval and needs remediation.
 
@@ -64,7 +68,7 @@ Do not lower the bar by accepting an answer that required the full explanation a
 1. Overdue exercise, study-set, or quiz review.
 2. Due exercise, study-set, or quiz review.
 3. Mistakes recorded in `notes`.
-4. Lowest-confidence section.
+4. Lowest-confidence reviewable artifact, grouped by section.
 5. Next lesson in the curriculum.
 
 When several items are due, interleave them: mix older review, newer review, weak spots, and one transfer/application prompt.
@@ -92,6 +96,8 @@ When a lesson has been covered in a study session, add or update:
 
 Use lesson progress metadata to resume the course. Use exercise, study-set, and quiz metadata for review scheduling.
 
+Only write lesson progress inside the selected copied course folder. Do not write real learner progress into `_Course Scaffold/`.
+
 ## Review Metadata
 
 When the session gives enough evidence, update exercise, study-set, and quiz frontmatter:
@@ -112,6 +118,19 @@ Confidence schedule:
 
 If evidence is mixed, choose the lower confidence and record the weak spot.
 
+Evidence rubric:
+
+- `clean` unaided recall or application: confidence 4 or 5.
+- `clean` after one small nudge, or correct but shallow: confidence 3 or 4.
+- `partial` with meaningful hints: confidence 2 or 3.
+- `missed`, `no attempt`, or needed a full explanation: confidence 0 or 1.
+
+Do not mark an artifact as `mastered` unless the learner completes a fresh nearby retrieval prompt cleanly after any hint or explanation.
+
+For `confidence: 5`, use 14 days by default. Use up to 30 days only after repeated clean recalls or explicit learner preference.
+
+When updating metadata, write only inside the selected copied course folder.
+
 ## Session Close
 
-End with what was reviewed or learned, observed weak spots, metadata changes made, and the next recommended study action. Keep it short.
+End with what was reviewed or learned, observed weak spots, metadata changes made, repair signals recorded or proposed, and the next recommended study action. Keep it short.

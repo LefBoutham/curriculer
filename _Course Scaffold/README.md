@@ -1,5 +1,7 @@
 # Course Scaffold
 
+Scaffold version: 0.1.0
+
 Copy this folder when starting a new course. Rename the copied folder to the course name, then update `CONTEXT.md`, `AGENTS.md`, and `00 Curriculum Index.md`.
 
 ## What This Scaffold Provides
@@ -8,13 +10,13 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 - A `CONTEXT.md` for shared course language and boundaries.
 - An `AGENTS.md` file that tells future LLMs how to work inside the course.
 - An empty `Glossary/` folder for learner-facing term notes.
-- A grill-with-docs prompt file for clarifying the course before building it.
+- A course setup grill prompt file for clarifying the course before building it.
 - Exercise, flashcard, and quiz templates with spaced repetition frontmatter.
 - A Dataview-friendly review dashboard.
 
 ## Suggested Setup Flow
 
-1. Copy this folder.
+1. Copy this folder into a downstream/local learning workspace.
 2. Rename the copy to the course name.
 3. Open `00 Course Setup Grill.md` with an LLM.
 4. Answer the grill questions one at a time.
@@ -22,6 +24,22 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 6. Add glossary terms only when requested or when a term needs a stable learner-facing definition.
 7. Replace `01 Section Template` with real numbered sections.
 8. Add lessons, exercises, flashcards, and quizzes as the course develops.
+
+## Post-Copy Placeholder Sweep
+
+After copying the scaffold, replace these placeholders everywhere they appear:
+
+- `COURSE_NAME`
+- `01 Section Template`
+- `Lesson Template`
+- `FROM "COURSE_NAME"` in `00 Review Dashboard.md`
+- section names in lesson, exercise, flashcard, and quiz frontmatter
+
+Use a text search before studying the course:
+
+```sh
+rg "COURSE_NAME|Section Template|Lesson Template" "COURSE_FOLDER"
+```
 
 ## Naming Convention
 
@@ -62,3 +80,17 @@ When a term has a glossary note, link meaningful mentions in course files to tha
 ```md
 [[Glossary/Term Name|Term Name]]
 ```
+
+Do not link every repeated occurrence mechanically. Link the first meaningful occurrence in a section or any occurrence where the learner is likely to want the definition.
+
+## Source Convention
+
+Use `_attachments/00 Source Index.md` for canonical source material when the course depends on trusted external material. Each source entry should include:
+
+- source id
+- local file path or URL
+- trust level
+- access date when relevant
+- affected sections
+
+Lessons can refer to source ids in their `source:` frontmatter.

@@ -2,6 +2,32 @@
 
 This context defines the shared language for building repeatable Obsidian courses that can be studied with an LLM.
 
+## Course Contract
+
+**Outcome**:
+What the learner should be able to do after finishing this course.
+
+**Target Learner**:
+Who the course is for, including assumed prerequisites and existing fluency.
+
+**Boundary**:
+What belongs outside the course even when related.
+
+**Source Policy**:
+Which sources the course should trust. Generated explanations are secondary to canonical sources.
+
+**Practice Shape**:
+The kind of performance the course should ask for: recall, coding, writing, problem solving, artifact creation, or a mix.
+
+**Quiz Style**:
+The kind of self-checks the course should use: multiple choice, short answer, scenario-based, or artifact-based.
+
+**Completion Standard**:
+What counts as finishing a section or the whole course.
+
+**Maintenance Rule**:
+When the course should be revised.
+
 ## Language
 
 **Course**:
@@ -15,6 +41,10 @@ _Avoid_: Module, chapter, unit
 **Lesson**:
 A single focused note that teaches one concept, operation, or skill.
 _Avoid_: Page, article, content item
+
+**Exercise Set**:
+A reviewable collection of applied practice for one section.
+_Avoid_: Worksheet, homework, assignment
 
 **Study Set**:
 A reviewable collection of flashcards for one section.
@@ -37,7 +67,7 @@ The note that lists glossary terms with one-line meanings.
 _Avoid_: Table of contents, glossary home
 
 **Review State**:
-The frontmatter fields that describe when and how well a study set or quiz has been reviewed.
+The frontmatter fields that describe when and how well an exercise set, study set, or quiz has been reviewed.
 _Avoid_: Progress, grade
 
 **Confidence**:
@@ -60,12 +90,13 @@ _Avoid_: Failed, bad
 
 - A **Course** contains one or more **Sections**.
 - A **Section** contains one or more **Lessons**.
+- A **Section** has one **Exercise Set** by default.
 - A **Section** has one **Study Set** by default.
 - A **Section** has one **Quiz** by default.
 - A **Course** has one **Glossary**.
 - A **Glossary** has one **Glossary Index**.
 - A **Glossary Index** links to zero or more **Glossary Terms**.
-- A **Study Set** and a **Quiz** each have one **Review State**.
+- An **Exercise Set**, **Study Set**, and **Quiz** each have one **Review State**.
 - **Confidence** influences `next_review`.
 - **Mastered**, **Needs Review**, and **Needs Practice** are values of **Review State**.
 

@@ -6,7 +6,7 @@ status: not started
 last_reviewed:
 next_review:
 review_count: 0
-confidence: 0
+confidence:
 notes:
 ---
 # 01 Section Template Flashcards

@@ -10,8 +10,9 @@ For each question:
 2. Provide the recommended answer.
 3. Wait for the learner's response.
 4. Resolve terminology conflicts against `CONTEXT.md`.
-5. Update `CONTEXT.md` immediately when a course-specific term is clarified.
-6. Create an ADR only when the decision is hard to reverse, surprising, and trade-off-driven.
+5. Update the relevant `CONTEXT.md` Course Contract field or language definition immediately.
+6. Update `_attachments/00 Source Index.md` when source policy names trusted sources.
+7. Create an ADR only when the decision is hard to reverse, surprising, and trade-off-driven.
 
 ## Questions
 

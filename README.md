@@ -24,6 +24,26 @@ This repository is the public base for Curriculer course workspaces. It ships:
 
 Curriculer is intentionally plain. It does not require a database, hosted service, LMS, or proprietary file format. A course is a folder of Markdown, simple embedded HTML, and source attachments that can be used in Obsidian, edited in any text editor, and studied with an LLM.
 
+This repository should remain a public base. Do not add real courses or learner review history here; copy the scaffold into a downstream/local learning workspace instead.
+
+## Quickstart
+
+Copy the scaffold into your own learning workspace:
+
+```sh
+cp -R "_Course Scaffold" "/path/to/learning-workspace/My Course"
+```
+
+Then replace scaffold placeholders in the copied course:
+
+- `COURSE_NAME`
+- `01 Section Template`
+- `Lesson Template`
+- dashboard `FROM "COURSE_NAME"` queries
+- section-level exercise, flashcard, and quiz frontmatter
+
+Open `00 Course Setup Grill.md` in the copied course with an LLM to define the outcome, learner, boundaries, source policy, practice shape, quiz style, and completion standard. In Codex, use `course-study-coach` once the copied course has real lesson and review material.
+
 ## The Problem
 
 Modern AI tutoring has made content generation cheap. That is useful, but it creates a new failure mode: learning can become a pile of local optimizations.
@@ -304,7 +324,7 @@ Curriculer uses review metadata to schedule future contact with material. The de
 last_reviewed:
 next_review:
 review_count: 0
-confidence: 0
+confidence:
 status: not started
 notes:
 ```
@@ -449,11 +469,14 @@ These are not grades. They are routing labels. Their job is to decide what the l
 
 ## How To Start A Course
 
-1. Copy `_Course Scaffold/` to a new top-level folder named after the course.
+1. Copy `_Course Scaffold/` to a new top-level folder named after the course in a downstream/local learning workspace.
 2. Rename scaffold placeholders in the copied course:
    - `00 Curriculum Index.md`
    - `CONTEXT.md`
    - `AGENTS.md`
+   - `00 Review Dashboard.md`
+   - `Glossary/00 Glossary Index.md`
+   - section lesson, exercise, flashcard, and quiz frontmatter
 3. Open `00 Course Setup Grill.md` with an LLM.
 4. Define the outcome, learner, boundaries, section plan, source policy, practice shape, quiz style, and completion standard.
 5. Update `CONTEXT.md` as the course language becomes clear.
@@ -506,6 +529,8 @@ Find where I left off and start with any overdue reviews.
 
 The skill should inspect the course, prefer due reviews, ask one question at a time, avoid explaining before the first retrieval attempt, update lesson progress when appropriate, and update review metadata when there is enough evidence.
 
+In another LLM environment, ask the agent to read `.codex/skills/course-study-coach/SKILL.md` and follow that protocol.
+
 ## Repository Layout
 
 ```text
@@ -514,6 +539,13 @@ The skill should inspect the course, prefer due reviews, ask one question at a t
 |   `-- skills/
 |       `-- course-study-coach/
 |           `-- SKILL.md
+|-- .github/
+|   `-- workflows/
+|       `-- validate.yml
+|-- docs/
+|   `-- examples.md
+|-- scripts/
+|   `-- validate_curriculer.py
 |-- _Course Scaffold/
 |   |-- 00 Course Setup Grill.md
 |   |-- 00 Curriculum Index.md
@@ -534,12 +566,17 @@ The skill should inspect the course, prefer due reviews, ask one question at a t
 |   |   `-- 00 Glossary Index.md
 |   |-- README.md
 |   |-- _attachments/
+|   |   |-- 00 Source Index.md
 |   |   `-- README.md
 |   `-- docs/
 |       `-- adr/
 |           `-- README.md
+|-- .gitignore
 |-- 00 Courses Index.md
 |-- AGENTS.md
+|-- CHANGELOG.md
+|-- CONTRIBUTING.md
+|-- LICENSE
 `-- README.md
 ```
 
@@ -619,6 +656,14 @@ The interesting part is not a clever file format. The interesting part is that a
 
 That is enough structure to turn an LLM from a content generator into a curriculum partner.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). The short version: keep this repository as a scaffold base, preserve plain Markdown and local files, and run:
+
+```sh
+python3 scripts/validate_curriculer.py --mode scaffold
+```
+
 ## License
 
-No license file is currently included. Add one before treating this repository as reusable open-source software.
+MIT. See [LICENSE](LICENSE).

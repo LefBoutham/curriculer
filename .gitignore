@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Local scratch course workspaces. Real courses do not belong in this base repo.
+_local/
+local-courses/
