@@ -1,216 +1,94 @@
 # Curriculer
 
-Curriculer is a Markdown-first template for local course folders.
-
-Use it to make a course that an LLM reads, updates, and uses for study.
-
-A course folder includes:
-
-- a curriculum index
-- lessons
-- exercises
-- flashcards
-- quizzes
-- glossary terms
-- source files
-- review data
-
-## What This Repository Contains
-
-- `_Course Scaffold/`: the template for a new course.
-- `.codex/skills/course-study-coach/`: the Codex study coach skill.
-- `AGENTS.md`: repository rules for agents.
-- `00 Courses Index.md`: a small index for course libraries.
-- `scripts/validate_curriculer.py`: a validator for scaffold files.
-
-## What This Repository Does Not Contain
-
-- Real courses.
-- Learner review history.
-- A database.
-- A hosted service.
-- A required app.
-
-Copy the scaffold into your own learning workspace before you make a real course.
+**A subject-based curriculum builder for LLM learning companions.**
 
 ## Why Curriculer Exists
 
-AI tools can make lessons fast.
+Knowledge is not a list of facts. It is a graph of connected ideas and skills.
+Advanced concepts depend on simpler concepts. If a prerequisite is weak, later
+work becomes slow or confusing. A single AI lesson cannot provide a complete
+path through a large subject.
 
-But a set of one-off lessons is not a course.
+Curriculer makes the curriculum the source of truth. It helps an LLM turn a
+goal, suggested topics, and source material into an ordered course. The course
+starts with prerequisites and builds toward the goal. If the learner has a gap,
+the agent can move back through the graph and reinforce it.
 
-Those lessons can use different terms.
+### Automaticity
 
-They can miss prerequisites.
+Working memory is limited. If a basic skill needs conscious effort, less capacity
+remains for complex work. Automaticity is the fast and reliable use of
+lower-level knowledge. It frees attention for higher-level reasoning.
 
-They can skip review.
+### Mastery
 
-They can give a useful answer without a stable path through the subject.
+Mastery means that a learner can use a prerequisite with enough accuracy and
+fluency to continue. Curriculer checks this before it adds more complexity. A
+gap sends the learner back to the required knowledge or skill.
 
-Curriculer keeps the course structure visible. It gives the learner and the agent one place to find:
+### Spaced Retrieval
 
-- the course goal
-- the section order
-- the next lesson
-- the trusted source files
-- the glossary terms
-- the exercises and quizzes
-- the due reviews
-- the weak spots
+Recall weakens without use. Rereading can feel familiar without producing
+reliable recall. Curriculer uses questions, exercises, and quizzes for retrieval
+practice. It records each result and schedules the next review. Successful
+reviews move farther apart. Difficult material returns sooner.
 
-The main unit is the curriculum, not the prompt.
+```mermaid
+flowchart LR
+    A["Goal and sources"] --> B["Map prerequisites"]
+    B --> C["Learn at the knowledge frontier"]
+    C --> D["Retrieve and apply"]
+    D --> E["Schedule review"]
+    D -->|Gap found| B
+    E --> C
+```
 
-## Learning Model
+For more background, see Justin Skycak on
+[prerequisite knowledge](https://www.justinmath.com/thoughts-about-prerequisite-knowledge/),
+[automaticity](https://www.justinmath.com/cognitive-science-of-learning-developing-automaticity/),
+[mastery learning](https://www.justinmath.com/a-brief-history-of-mastery-learning/), and
+[spaced repetition](https://www.justinmath.com/cognitive-science-of-learning-spaced-repetition/).
 
-Curriculer uses a small set of learning rules.
+## What Curriculer Is
 
-**Keep The Map Visible**
+Curriculer is a Markdown-first scaffold for local course folders. A course can
+contain a curriculum map, lessons, sources, exercises, flashcards, quizzes, a
+glossary, progress, and review dates.
 
-The curriculum index shows the course goal, section order, and next work.
+An LLM can teach from these files, quiz the learner, record evidence, and choose
+the next task. The state stays visible and portable. No database, hosted service,
+or application is required.
 
-**Use Stable Terms**
+The repository contains `_Course Scaffold/`, the `course-study-coach` skill,
+agent rules, and a scaffold validator.
 
-The glossary gives important terms one clear meaning inside the course.
+The base repository does not contain real courses or learner history.
 
-**Retrieve Before Explanation**
+## How To Use It
 
-The study coach asks the learner to answer first.
-
-It gives hints only after the learner makes an attempt.
-
-**Review On A Schedule**
-
-Review metadata lives in Markdown frontmatter. The agent can find due work without chat memory.
-
-**Repair Weak Prerequisites**
-
-If a learner misses a concept, the course can move back to the prerequisite.
-
-The fix can be a clearer lesson, a new exercise, a glossary note, or another review.
-
-**Keep The Learner In Control**
-
-The learner can use their own files, set their own goal, and choose their own pace.
-
-## Start A Course
-
-Copy the scaffold into a downstream or local learning workspace.
+Copy the scaffold into a separate learning workspace:
 
 ```sh
 cp -R "_Course Scaffold" "/path/to/learning-workspace/My Course"
 ```
 
-Then update the copied course.
+Then:
 
-1. Rename `COURSE_NAME` placeholders.
-2. Rename `01 Section Template`.
-3. Rename lesson, exercise, flashcard, and quiz placeholders.
-4. Update dashboard queries that refer to `COURSE_NAME`.
-5. Open `00 Course Setup Grill.md`.
-6. Define the goal, learner, scope, sources, practice, quiz style, and finish criteria.
-7. Replace the template section with real numbered sections.
-
-Do not create real courses inside this base repository.
-
-## Course Folder Shape
-
-A mature copied course usually has this shape:
-
-```text
-My Course/
-|-- AGENTS.md
-|-- CONTEXT.md
-|-- 00 Course Setup Grill.md
-|-- 00 Curriculum Index.md
-|-- 00 Review Dashboard.md
-|-- 01 Foundations/
-|   |-- 00 Section Index.md
-|   |-- 01 Lesson.md
-|   |-- exercises/
-|   |   `-- Exercises.md
-|   |-- flashcards/
-|   |   `-- Flashcards.md
-|   `-- quizes/
-|       |-- Quiz.md
-|       `-- Quiz.html
-|-- Glossary/
-|   `-- 00 Glossary Index.md
-`-- _attachments/
-    `-- 00 Source Index.md
-```
-
-The folder name `quizes` is kept for compatibility with existing course folders.
-
-## Study With Codex
-
-Curriculer includes the `course-study-coach` skill.
-
-Use it when you want to:
-
-- study
-- review
-- take a quiz
-- continue a course
-- find your last checkpoint
-- practice weak material
+1. Open `00 Course Setup Grill.md` and define the goal, scope, and learner.
+2. Add source material to `_attachments/` or give the agent suggested topics.
+3. Ask the agent to map prerequisites and build the numbered course sections.
+4. Use `course-study-coach` to learn, practice, review, and take quizzes.
+5. Let the agent update progress and review dates from study evidence.
 
 Example prompts:
 
 ```text
-Use course-study-coach. I want to study this course.
+Build this course from my goal and source files.
+Find where I left off and start the next useful task.
+Quiz me on due material and update my review data.
 ```
 
-```text
-Quiz me on the next due review and update the review metadata.
-```
-
-```text
-Find where I left off and start with overdue reviews.
-```
-
-The study coach should:
-
-- read the course instructions
-- inspect the curriculum index
-- find due reviews
-- ask one question at a time
-- wait for a learner attempt
-- give hints before full answers
-- update progress and review metadata when there is enough evidence
-
-## Review Metadata
-
-Exercises, flashcards, quizzes, and lessons can use review metadata.
-
-```yaml
-last_reviewed:
-next_review:
-review_count: 0
-confidence:
-status: not started
-notes:
-```
-
-The default review states are:
-
-- `not started`
-- `needs practice`
-- `needs review`
-- `mastered`
-
-These states are routing labels. They tell the agent what to show next. They are not grades.
-
-## Repository Rules
-
-Keep this repository as a public base.
-
-- Do not add real courses.
-- Do not add learner review history.
-- Keep files plain and editable.
-- Prefer Markdown and simple embedded HTML.
-- Keep quiz HTML self-contained.
-- Preserve the `quizes` folder name unless the repository standard changes.
-- Store important state in files, not only in chat history.
+Do not create real courses inside this base repository. Copy the scaffold first.
 
 Before you change the scaffold, run:
 
@@ -218,23 +96,7 @@ Before you change the scaffold, run:
 python3 scripts/validate_curriculer.py --mode scaffold
 ```
 
-## Design Principles
-
-- Markdown first.
-- Local first.
-- Human editable.
-- Agent readable.
-- Curriculum before content.
-- Review as course data.
-- Mistakes improve the course.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Use short, direct prose in public documentation.
-
-Prefer active voice. Use the same term for the same thing each time.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules.
 
 ## License
 
