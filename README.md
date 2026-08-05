@@ -1,8 +1,8 @@
 # Curriculer
 
-**A subject-based curriculum builder for LLM learning companions.**
+**A curriculum builder & LLM tutor combined using optimal learning methodologies.**
 
-## Why Curriculer Exists
+## Why
 
 Knowledge is not a list of facts. It is a graph of connected ideas and skills.
 Advanced concepts depend on simpler concepts. If a prerequisite is weak, later
@@ -49,7 +49,7 @@ For more background, see Justin Skycak on
 [mastery learning](https://www.justinmath.com/a-brief-history-of-mastery-learning/), and
 [spaced repetition](https://www.justinmath.com/cognitive-science-of-learning-spaced-repetition/).
 
-## What Curriculer Is
+## What
 
 Curriculer is a Markdown-first scaffold for local course folders. A course can
 contain a curriculum map, lessons, sources, exercises, flashcards, quizzes, a
