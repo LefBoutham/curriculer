@@ -1,6 +1,6 @@
 # Curriculer
 
-**A curriculum builder & LLM tutor combined using optimal learning methodologies.**
+**A curriculum builder & LLM tutor for any subject, using optimal learning methodologies.**
 
 ## Why
 
