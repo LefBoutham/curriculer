@@ -6,7 +6,7 @@
 
 Knowledge is not a list of facts. It is a graph of connected ideas and skills.
 Advanced concepts depend on simpler concepts, so a weak prerequisite can make
-later work slow or confusing. A single AI lesson cannot provide a complete path
+later work unnecessarily hard. A single AI lesson cannot provide a complete path
 through a large subject.
 
 The curriculum holds the course plan in one place. Curriculer helps an LLM turn
