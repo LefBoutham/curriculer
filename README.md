@@ -12,7 +12,7 @@ through a large subject.
 The curriculum holds the course plan in one place. Curriculer helps an LLM turn
 a goal, suggested topics, and source material into an ordered course. The course
 starts with prerequisites and builds toward the goal. If the learner has a gap,
-the agent can move back through the graph and reinforce it.
+the agent will automatically move back through the graph and reinforce it.
 
 ### Automaticity
 
