@@ -1,37 +1,37 @@
 # Curriculer
 
-**Learn anything. A curriculum builder & LLM tutor for any subject, using optimal learning methodologies.**
+**Learn anything. A curriculum builder & LLM tutor for any subject, using the best learning methods.**
 
 ## Why
 
-Knowledge is not a list of facts; it is a graph of connected ideas and skills.
-Advanced concepts depend on simpler concepts, and if a prerequisite is weak,
-later work becomes slow or confusing. A single AI lesson cannot provide a
-complete path through a large subject.
+Knowledge is not a list of facts. It is a graph of connected ideas and skills.
+Advanced concepts depend on simpler concepts, so a weak prerequisite can make
+later work slow or confusing. A single AI lesson cannot provide a complete path
+through a large subject.
 
-Curriculer makes the curriculum the source of truth, helping an LLM turn a goal,
-suggested topics, and source material into an ordered course. The course starts
-with prerequisites and builds toward the goal; if the learner has a gap, the
-agent can move back through the graph and reinforce it.
+The curriculum holds the course plan in one place. Curriculer helps an LLM turn
+a goal, suggested topics, and source material into an ordered course. The course
+starts with prerequisites and builds toward the goal. If the learner has a gap,
+the agent can move back through the graph and reinforce it.
 
 ### Automaticity
 
-Working memory is limited, so if a basic skill needs conscious effort, less
-capacity remains for complex work. Automaticity is the fast and reliable use of
-lower-level knowledge, freeing attention for higher-level reasoning.
+Working memory is limited. If a basic skill needs conscious effort, less capacity
+remains for complex work. Automaticity is the fast and reliable use of
+lower-level knowledge. It frees attention for higher-level reasoning.
 
 ### Mastery
 
 Mastery means that a learner can use a prerequisite with enough accuracy and
-fluency to continue, and Curriculer checks this before it adds more complexity.
-A gap sends the learner back to the required knowledge or skill.
+fluency to continue. Curriculer checks this before it adds more complexity. A
+gap sends the learner back to the required knowledge or skill.
 
 ### Spaced Retrieval
 
-Recall weakens without use, while rereading can feel familiar without producing
-reliable recall. Curriculer uses questions, exercises, and quizzes for retrieval
-practice, and it records each result and schedules the next review. Successful
-reviews move farther apart, while difficult material returns sooner.
+Recall weakens without use. Rereading can feel familiar, but it does not always
+produce reliable recall. Curriculer uses questions, exercises, and quizzes for
+retrieval practice. It records each result and schedules the next review.
+Successful reviews move farther apart. Difficult material returns sooner.
 
 ```mermaid
 flowchart LR
@@ -51,13 +51,13 @@ For more background, see Justin Skycak on
 
 ## What
 
-Curriculer is a Markdown-first scaffold for local course folders, and a course
-can contain a curriculum map, lessons, sources, exercises, flashcards, quizzes,
-a glossary, progress, and review dates.
+Curriculer is a Markdown-first scaffold for local course folders. A course can
+contain a curriculum map, lessons, sources, exercises, flashcards, quizzes, a
+glossary, progress, and review dates.
 
 An LLM can teach from these files, quiz the learner, record evidence, and choose
-the next task, while the state stays visible and portable. No database, hosted
-service, or application is required.
+the next task. The state stays visible and portable. No database, hosted service,
+or application is required.
 
 The repository contains `_Course Scaffold/`, the `course-study-coach` skill,
 agent rules, and a scaffold validator.
@@ -88,7 +88,7 @@ Find where I left off and start the next useful task.
 Quiz me on due material and update my review data.
 ```
 
-Do not create real courses inside this base repository; copy the scaffold first.
+Do not create real courses inside this base repository. Copy the scaffold first.
 
 Before you change the scaffold, run:
 
