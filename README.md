@@ -1,6 +1,6 @@
 # Curriculer
 
-**Learn anything. A curriculum builder & LLM tutor for any subject, using the best learning methods.**
+**Learn anything. A curriculum builder & LLM tutor for any subject, using the best scientifically proven learning methods.**
 
 ## Why
 
