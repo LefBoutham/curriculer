@@ -9,7 +9,8 @@ Curriculer is a public base for Markdown-first, LLM-assisted course workspaces. 
 - Preserve the `quizes` folder spelling unless the whole convention is intentionally migrated.
 - Prefer Markdown, YAML frontmatter, Obsidian-compatible links, collapsible `<details>` blocks, and unminified self-contained HTML.
 - Keep quiz HTML local and dependency-free. Do not add CDNs, remote scripts, hidden persistence, analytics, or network calls.
-- Update related convention files together when behavior changes: `README.md`, `AGENTS.md`, `_Course Scaffold/README.md`, `_Course Scaffold/AGENTS.md`, `_Course Scaffold/CONTEXT.md`, and `.codex/skills/course-study-coach/SKILL.md`.
+- Update related convention files together when behavior changes: `README.md`, `AGENTS.md`, `_Course Scaffold/README.md`, `_Course Scaffold/AGENTS.md`, `_Course Scaffold/CONTEXT.md`, and `.agents/skills/course-study-coach/SKILL.md`.
+- Keep agent skills in `.agents/skills/`. `.claude/skills/<name>` must stay a symlink to `../../.agents/skills/<name>` so Claude Code loads the same skill. On Windows, clone with `git clone -c core.symlinks=true`; the validator fails when Git checks out the link as a plain file.
 
 ## Checks
 

@@ -43,13 +43,14 @@ Do not modify `_Course Scaffold/` when creating a normal course. Only change the
 
 Follow the course-level `AGENTS.md` when one exists. If a course does not have one yet, use `_Course Scaffold/AGENTS.md` as the fallback convention.
 
-Use the repo-scoped `course-study-coach` skill for LLM-led study sessions, reviews, exercises, study sets, quizzes, diagnostic starting-point checks, active-recall tutoring, and review metadata updates.
+Use the repo-scoped `course-study-coach` skill in `.agents/skills/course-study-coach/` for LLM-led study sessions, reviews, exercises, study sets, quizzes, diagnostic starting-point checks, active-recall tutoring, and review metadata updates.
 
 Base repository guardrails:
 
 - Do not add real course folders to this repository.
 - Do not write learner `last_reviewed`, `next_review`, `review_count`, `confidence`, `last_studied`, or `study_count` values into `_Course Scaffold/`.
 - Examples in this repository must be short synthetic snippets, not a full sample course.
+- Keep repo skills in `.agents/skills/<name>/`, which Codex reads. Claude Code reads `.claude/skills/`, so `.claude/skills/<name>` is a symlink to `../../.agents/skills/<name>`. Edit only the `.agents/skills/` copy and do not add a second copy.
 - Before changing scaffold conventions, check that the change remains Markdown-first, local-first, human-editable, agent-friendly, and does not require a database, hosted service, build step, opaque generated file, or remote quiz dependency.
 - Use `docs/adr/` only for hard-to-reverse, surprising, trade-off-driven convention changes.
 

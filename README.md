@@ -62,6 +62,12 @@ or application is required.
 The repository contains `_Course Scaffold/`, the `course-study-coach` skill,
 agent rules, and a scaffold validator.
 
+The skill lives in `.agents/skills/course-study-coach/`, where Codex finds it.
+Claude Code finds the same skill through the `.claude/skills/course-study-coach`
+symlink. On Windows, Git may check out that symlink as a small text file. Clone
+with `git clone -c core.symlinks=true` (needs Developer Mode or an administrator
+shell), or copy the skill folder into `.claude/skills/`.
+
 The base repository does not contain real courses or learner history.
 
 ## How To Use It
