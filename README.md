@@ -1,6 +1,10 @@
 # Curriculer
 
-**Learn anything. A curriculum builder & LLM tutor for any subject, using the best scientifically proven learning methods.**
+**Learn anything. A curriculum builder and LLM tutor for any subject, built on
+prerequisites, mastery, automaticity and spaced retrieval.**
+
+Your tutor is only as good as the model and the sources you give it. The course
+is plain files, so you can read it and correct it.
 
 ## Why
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.5.2
+
+- The README's opening line now names the methods Curriculer is built on (prerequisites, mastery, automaticity and spaced retrieval) instead of calling them "the best scientifically proven learning methods". The "Why" section explains each one and links its source. A new line under it says the tutor is only as good as the model and the sources you give it, and that the course is plain files you can read and correct.
+
+Upgrading an existing learning workspace: nothing to do. The scaffold, the skill and the rules are unchanged.
+
 ## v0.5.1
 
 - The README's "How To Use It" now copies the `course-study-coach` skill into the learning workspace, in `.agents/skills/` with a `.claude/skills/` link, as well as the scaffold. It says to open the agent at the workspace root, and how to copy the skill on Windows. Before, a workspace set up from the README had courses but no skill. `AGENTS.md`, `00 Courses Index.md` and `_Course Scaffold/README.md` say the same.
