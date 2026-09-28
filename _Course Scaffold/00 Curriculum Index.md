@@ -28,7 +28,7 @@ One-sentence description of the course outcome.
 
 ## Curriculum Graph
 
-Use this section to make prerequisite structure visible.
+Use this section to make prerequisite structure visible. Before the first lesson of a section, the LLM checks the review state of the sections in its Prerequisites column. When a row names none, it checks every earlier section.
 
 | Section | Outcome | Prerequisites | Depends On | Mastery Evidence |
 | --- | --- | --- | --- | --- |

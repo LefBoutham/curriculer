@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.0
+
+- The tutor now checks prerequisites before new material. Before the first lesson of a new section, it reads the review state of the sections that section builds on: the ones named in its section index, its Curriculum Graph row, or the lesson's `prerequisites`, or else every earlier section. A reviewed set that needs practice, has confidence 2 or lower, or is overdue gets a short targeted review first, and the session close says what the check found. Sets that were never reviewed are skipped. There is no new frontmatter.
+- Added a **Prerequisite** entry to `CONTEXT.md`, and an example of the check to `docs/examples.md`.
+
+Upgrading an existing learning workspace: replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version. A course's own `AGENTS.md` wins over the skill, so also copy the new Prerequisite Check section from `_Course Scaffold/AGENTS.md` into each course's `AGENTS.md`, and the Prerequisite entry into each course's `CONTEXT.md`.
+
 ## v0.3.0
 
 - Clean reviews now move farther apart. For confidence 4 or 5, the next interval is the larger of the base interval and twice the previous interval, up to 180 days. Confidence 3 or lower goes back to the base schedule. The previous interval comes from the existing `last_reviewed` and `next_review` fields, so there is no new field.

@@ -186,6 +186,15 @@ When updating review metadata:
 - For quizzes, update `last_score` and `best_score` when score is known.
 - Keep `notes` short and actionable.
 
+## Prerequisite Check
+
+A lesson starts a new section when no lesson in that section has `study_status: studied`. Before that first lesson, check the review state of the sections it builds on:
+
+- The prerequisite sections are the sections named under Prerequisites in the section's `00 Section Index.md`, in its Curriculum Graph row, or in the lesson's `prerequisites`. When none of these names another section of the course, every earlier section is a prerequisite.
+- Skip sets with `status: not started`. A reviewed set is weak when it is `needs practice`, has `confidence` 2 or lower, or has a `next_review` before today.
+- If a prerequisite set is weak, give a short targeted review of the weakest sets first (lowest confidence, then the oldest `next_review`; two or three sets at most), update their review metadata, then start the lesson. The learner can choose to go straight to the lesson.
+- In the session close, say which sets were weak and whether they were reviewed first.
+
 ## Flashcards
 
 Use Obsidian-friendly collapsible HTML:
