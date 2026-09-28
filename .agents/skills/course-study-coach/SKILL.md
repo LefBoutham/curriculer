@@ -100,34 +100,47 @@ Only write lesson progress inside the selected copied course folder. Do not writ
 
 ## Review Metadata
 
-When the session gives enough evidence, update exercise, study-set, and quiz frontmatter:
+When the session gives enough evidence, update exercise, study-set, and quiz frontmatter. Read the old `last_reviewed` and `next_review` before you change them; the schedule needs them.
 
 - `last_reviewed`: today's date.
 - `review_count`: increment by 1.
-- `confidence`: observed performance or learner report.
+- `confidence`: observed performance, using the evidence rubric below.
 - `status` and `next_review`: schedule below.
 - Quiz scores: update `last_score` and `best_score` when known.
 - `notes`: short, actionable weak spots.
 
-Confidence schedule:
+Confidence schedule, with base intervals:
 
 - `0` or `1`: `needs practice`, review tomorrow.
 - `2` or `3`: `needs review`, review in 3 days.
 - `4`: `needs review`, review in 7 days.
-- `5`: `mastered`, review in 14 to 30 days.
+- `5`: `mastered`, review in 14 days.
+
+Clean reviews move farther apart. For confidence `4` or `5`:
+
+1. Previous interval: the old `next_review` minus the old `last_reviewed`, in days.
+2. Next interval: the larger of the base interval and twice the previous interval, at most 180 days.
+3. `next_review`: today plus the next interval.
+
+Use the base interval alone when confidence is `3` or lower, when either old date is blank, or when the old `next_review` is not after the old `last_reviewed`. If the learner asks for a different date, use theirs.
+
+For example, a set with `last_reviewed: 2026-03-01` and `next_review: 2026-03-15`, reviewed on 2026-03-15 with confidence 5, has a previous interval of 14 days, so it gets 28 days: `next_review: 2026-04-12`.
 
 If evidence is mixed, choose the lower confidence and record the weak spot.
 
 Evidence rubric:
 
-- `clean` unaided recall or application: confidence 4 or 5.
+- `clean`, unaided and fluent recall or application (quick, with no hesitation and no working it out again): confidence 5.
+- `clean` and unaided, but slow or reconstructed: confidence 4.
 - `clean` after one small nudge, or correct but shallow: confidence 3 or 4.
 - `partial` with meaningful hints: confidence 2 or 3.
 - `missed`, `no attempt`, or needed a full explanation: confidence 0 or 1.
 
-Do not mark an artifact as `mastered` unless the learner completes a fresh nearby retrieval prompt cleanly after any hint or explanation.
+You cannot time answers, so judge fluency from the answer: hedging, trial and error, or rebuilding the idea step by step mean it is not fluent yet. If the learner says an answer came slowly, believe them. When unsure between 4 and 5, choose 4.
 
-For `confidence: 5`, use 14 days by default. Use up to 30 days only after repeated clean recalls or explicit learner preference.
+Self-rated evidence caps at confidence 4. When the only evidence is the learner's own report or their own marks on flashcards, such as "I knew them all", use at most confidence 4 and `needs review`. Confidence 5 and `mastered` need an attempt you checked in the session, or a quiz score. To check a self-report, ask a few fresh retrieval prompts from the set.
+
+Do not mark an artifact as `mastered` unless the learner completes a fresh nearby retrieval prompt cleanly after any hint or explanation.
 
 When updating metadata, write only inside the selected copied course folder.
 
