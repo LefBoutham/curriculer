@@ -18,7 +18,8 @@ the agent will automatically move back through the graph and reinforce it.
 
 Working memory is limited. If a basic skill needs conscious effort, less capacity
 remains for complex work. Automaticity is the fast and reliable use of
-lower-level knowledge. It frees attention for higher-level reasoning.
+lower-level knowledge. It frees attention for higher-level reasoning. Curriculer
+gives its top score only to recall that is both quick and correct.
 
 ### Mastery
 
@@ -31,7 +32,8 @@ gap sends the learner back to the required knowledge or skill.
 Recall weakens without use. Rereading can feel familiar, but it does not always
 produce reliable recall. Curriculer uses questions, exercises, and quizzes for
 retrieval practice. It records each result and schedules the next review.
-Successful reviews move farther apart. Difficult material returns sooner.
+Successful reviews move farther apart: each clean review about doubles the gap,
+up to six months. Difficult material returns sooner.
 
 ```mermaid
 flowchart LR

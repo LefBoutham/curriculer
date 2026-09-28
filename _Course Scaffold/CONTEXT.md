@@ -71,11 +71,11 @@ The frontmatter fields that describe when and how well an exercise set, study se
 _Avoid_: Progress, grade
 
 **Confidence**:
-A learner-reported score from 0 to 5 that determines the next review interval.
+A score from 0 to 5 for how well the learner recalled the material, set from evidence the LLM checked. With the previous interval, it determines the next review interval. The learner's own report alone supports at most 4.
 _Avoid_: Ease, difficulty, mastery score
 
 **Mastered**:
-A review status meaning the learner recalled the material cleanly without help.
+A review status meaning the learner recalled the material cleanly, fluently, and without help, in an attempt the LLM checked or in a quiz.
 _Avoid_: Done, completed, finished
 
 **Needs Review**:
@@ -97,7 +97,7 @@ _Avoid_: Failed, bad
 - A **Glossary** has one **Glossary Index**.
 - A **Glossary Index** links to zero or more **Glossary Terms**.
 - An **Exercise Set**, **Study Set**, and **Quiz** each have one **Review State**.
-- **Confidence** influences `next_review`.
+- **Confidence** and the previous review interval set `next_review`.
 - **Mastered**, **Needs Review**, and **Needs Practice** are values of **Review State**.
 
 ## Example dialogue

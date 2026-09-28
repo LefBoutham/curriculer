@@ -66,6 +66,42 @@ confidence: 3
 notes: "Confused foreign key validation with joins; retry constraint-writing exercise."
 ```
 
+## Growing Review Interval
+
+Two clean reviews of one study set. Work out the previous interval before you overwrite the dates.
+
+Before the first review:
+
+```yaml
+status: mastered
+last_reviewed: 2026-03-01
+next_review: 2026-03-15
+review_count: 3
+confidence: 5
+```
+
+On 2026-03-15 the learner answers every prompt quickly and correctly: confidence 5. The previous interval is 14 days, so the next one is the larger of 14 and 2 × 14, which is 28 days:
+
+```yaml
+status: mastered
+last_reviewed: 2026-03-15
+next_review: 2026-04-12
+review_count: 4
+confidence: 5
+```
+
+On 2026-04-12 every answer is correct, but two take a while: confidence 4. The previous interval is 28 days, so the next one is the larger of 7 and 2 × 28, which is 56 days:
+
+```yaml
+status: needs review
+last_reviewed: 2026-04-12
+next_review: 2026-06-07
+review_count: 5
+confidence: 4
+```
+
+If a later review scores 3 or lower, the set goes back to the base schedule: 3 days, or tomorrow.
+
 ## Quiz Question Object
 
 Keep the Markdown quiz note as the human-readable inventory, then mirror the question in the self-contained HTML quiz.

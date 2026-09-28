@@ -159,10 +159,19 @@ For `not started` artifacts, `confidence` may be blank. Set numeric confidence o
 
 When the learner reports performance, the LLM should update review frontmatter directly.
 
+Base intervals:
+
 - `confidence: 0` or `1`: `status: needs practice`, review tomorrow
 - `confidence: 2` or `3`: `status: needs review`, review in 3 days
 - `confidence: 4`: `status: needs review`, review in 7 days
-- `confidence: 5`: `status: mastered`, review in 14 to 30 days
+- `confidence: 5`: `status: mastered`, review in 14 days
+
+Clean reviews move farther apart. For `confidence: 4` or `5`, the next interval is the larger of the base interval and twice the previous interval, at most 180 days. The previous interval is the old `next_review` minus the old `last_reviewed`, so read both before you update them. Use the base interval alone when confidence is 3 or lower, when either old date is blank, or when the old `next_review` is not after the old `last_reviewed`.
+
+Confidence evidence:
+
+- `confidence: 5` needs clean, unaided and fluent recall or application: quick, no hesitation, no working it out again. A clean but slow or reconstructed answer is `confidence: 4`. When unsure, choose 4.
+- The learner's own report, or their own marks on flashcards, supports at most `confidence: 4`. `confidence: 5` and `status: mastered` need an attempt the LLM checked, or a quiz score.
 
 Use reviewable artifact confidence, grouped by section, rather than inventing section-level confidence.
 
