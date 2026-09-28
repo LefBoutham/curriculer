@@ -25,6 +25,7 @@ The learner must attempt retrieval at least once before receiving clues, explana
    - Use lesson progress frontmatter as the checkpoint source of truth. Prefer the highest ordered lesson with `study_status: studied` and continue from the next lesson unless the learner asks for review or a different point.
    - Prefer due or overdue reviews before new lessons unless the learner explicitly asks to move forward or stop revision.
    - If nothing is due, suggest the next incomplete lesson or lowest-confidence reviewable artifact, grouped by section.
+   - If the next lesson starts a new section, run the Prerequisite Check (under New Lessons) before you suggest it.
    - If the course has weak metadata, state the likely starting point and ask the learner to confirm.
 
 3. **Ground the starting level when uncertain.**
@@ -69,20 +70,32 @@ Do not lower the bar by accepting an answer that required the full explanation a
 2. Due exercise, study-set, or quiz review.
 3. Mistakes recorded in `notes`.
 4. Lowest-confidence reviewable artifact, grouped by section.
-5. Next lesson in the curriculum.
+5. Next lesson in the curriculum, after the prerequisite check when it starts a new section.
 
 When several items are due, interleave them: mix older review, newer review, weak spots, and one transfer/application prompt.
 
 ## New Lessons
 
-1. Check prerequisites with a quick retrieval prompt.
-2. Give the minimum effective explanation or worked example.
-3. Move quickly to active practice, including literal syntax prompts when the subject has executable syntax.
-4. Use corrections and retries instead of extended exposition.
-5. When the learner has covered a lesson, update that lesson's progress frontmatter.
-6. Stop before cognitive overload; leave a clear next step.
+1. If the lesson starts a new section, run the prerequisite check first.
+2. Check the lesson's prerequisites with a quick retrieval prompt.
+3. Give the minimum effective explanation or worked example.
+4. Move quickly to active practice, including literal syntax prompts when the subject has executable syntax.
+5. Use corrections and retries instead of extended exposition.
+6. When the learner has covered a lesson, update that lesson's progress frontmatter.
+7. Stop before cognitive overload; leave a clear next step.
 
 Beginners get direct instruction, worked examples, and smaller steps. More advanced learners get fewer hints and more scenario-based prompts.
+
+### Prerequisite Check
+
+A lesson starts a new section when no lesson in that section has `study_status: studied`. Covering a lesson is not mastering it, so before that first lesson, check the review state of the sections it builds on:
+
+1. Find the prerequisite sections: the sections named under Prerequisites in the section's `00 Section Index.md`, in its row of the Curriculum Graph in `00 Curriculum Index.md`, or in the lesson's `prerequisites`. Take them all. If none of these names another section of the course, for example when the list says "None yet.", use every earlier section.
+2. Read the exercise, study-set, and quiz frontmatter in those sections. Skip sets with `status: not started`; they have no evidence yet. A reviewed set is weak when its `status` is `needs practice`, its `confidence` is 2 or lower, or its `next_review` is before today.
+3. If a set is weak, do a short targeted review before the lesson: a few retrieval prompts from each weak set, weakest first (lowest confidence, then the oldest `next_review`), two or three sets at most. Update their review metadata as usual, then start the lesson. Other weak sets stay in the review queue.
+4. If the learner asks to go straight to the lesson, do so.
+
+Say what the check found in the session close.
 
 ## Lesson Progress Metadata
 
@@ -146,4 +159,4 @@ When updating metadata, write only inside the selected copied course folder.
 
 ## Session Close
 
-End with what was reviewed or learned, observed weak spots, metadata changes made, repair signals recorded or proposed, and the next recommended study action. Keep it short.
+End with what was reviewed or learned, observed weak spots, metadata changes made, repair signals recorded or proposed, and the next recommended study action. If a prerequisite check ran, say which sets were weak and whether you reviewed them first or the learner chose to go straight on. Keep it short.

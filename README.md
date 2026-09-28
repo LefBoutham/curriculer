@@ -25,7 +25,9 @@ gives its top score only to recall that is both quick and correct.
 
 Mastery means that a learner can use a prerequisite with enough accuracy and
 fluency to continue. Curriculer checks this before it adds more complexity. A
-gap sends the learner back to the required knowledge or skill.
+gap sends the learner back to the required knowledge or skill. Before a new
+section, the tutor looks at the review state of the sections it builds on and
+reviews any weak or overdue one first.
 
 ### Spaced Retrieval
 

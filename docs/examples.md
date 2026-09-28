@@ -102,6 +102,28 @@ confidence: 4
 
 If a later review scores 3 or lower, the set goes back to the base schedule: 3 days, or tomorrow.
 
+## Prerequisite Check
+
+On 2026-05-25 the next lesson is `03 Joins/01 Inner Join`. No lesson in `03 Joins` is studied yet, so it starts a new section. Its section index says "None yet." under Prerequisites, so both earlier sections count.
+
+`01 Tables And Rows/flashcards/Flashcards.md`:
+
+```yaml
+status: needs review
+next_review: 2026-05-20
+confidence: 4
+```
+
+`02 Relational Modeling/quizes/Quiz.md`:
+
+```yaml
+status: needs review
+next_review: 2026-05-30
+confidence: 2
+```
+
+`02 Relational Modeling/exercises/Exercises.md` is `not started`, so it is skipped. The quiz is weak (confidence 2), and the flashcards are overdue. The tutor asks a few questions from the quiz, then from the flashcards, updates both sets, and then starts the lesson. The session close says: "Before Joins: reviewed the Relational Modeling quiz (confidence 2) and the overdue Tables And Rows flashcards."
+
 ## Quiz Question Object
 
 Keep the Markdown quiz note as the human-readable inventory, then mirror the question in the self-contained HTML quiz.
