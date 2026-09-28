@@ -21,9 +21,13 @@ State the key idea in one or two sentences.
 
 Explain why this matters for the course outcome.
 
-## Example
+## Worked Example
 
-Add a concrete example.
+Solve one concrete problem in numbered steps. Each step says what to do and why.
+
+1. First step. Why: the reason for it.
+2. Next step. Why: the reason for it.
+3. The result, and how to check it.
 
 ## Common Mistake
 
@@ -31,7 +35,14 @@ Describe a likely misunderstanding and how to correct it.
 
 ## Practice
 
-Add one small task that proves the learner can use the idea.
+Add one small task like the worked example, with different details, for the learner to do alone.
+
+<details>
+<summary>Answer</summary>
+
+Add the expected answer.
+
+</details>
 
 ## Mastery Evidence
 

@@ -78,7 +78,7 @@ When several items are due, interleave them: mix older review, newer review, wea
 
 1. If the lesson starts a new section, run the prerequisite check first.
 2. Check the lesson's prerequisites with a quick retrieval prompt.
-3. Give the minimum effective explanation or worked example.
+3. Teach with the lesson's worked example, one step at a time, or give the minimum effective explanation. If the learner can already do this kind of task, go straight to practice.
 4. Move quickly to active practice, including literal syntax prompts when the subject has executable syntax.
 5. Use corrections and retries instead of extended exposition.
 6. When the learner has covered a lesson, update that lesson's progress frontmatter.

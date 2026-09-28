@@ -27,6 +27,15 @@ Help the learner build and study a coherent course. Preserve the course language
 - `_attachments/` is for course assets and source files.
 - `_attachments/00 Source Index.md` is for trusted source material.
 
+## Building Lessons
+
+A lesson teaches one concept, operation, or skill. It has the sections of the scaffold's lesson template: Core Idea, Why It Matters, Worked Example, Common Mistake, Practice, and Mastery Evidence, then Repair Notes and Study Notes.
+
+- **Worked Example:** solve one concrete problem in numbered steps, and say why at each step. Beginners learn a new idea faster from a worked example than by working it out alone.
+- **Practice:** one small task like the worked example, with different details, for the learner to do alone. Put the answer in a `<details>` block.
+- **Keep confusable concepts apart.** When two concepts are easy to confuse, do not teach them in back-to-back lessons. Teach one first and put at least one other lesson between them. If one builds on the other, keep that order.
+- **Then contrast them.** In the section that teaches the later of the two, add one flashcard or exercise that asks the learner to tell them apart or to pick the one that fits a small case. Link both lessons from it.
+
 ## Glossary
 
 The glossary starts empty. Add terms only when the learner asks for a term to be added or when a term has become important enough to deserve a stable learner-facing definition.

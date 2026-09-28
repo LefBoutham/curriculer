@@ -29,6 +29,32 @@ A foreign key records that values in one table must match existing values in ano
 Explain what should happen when an order references a customer id that does not exist.
 ```
 
+## Worked Example
+
+A lesson's worked example, then its practice task. Each step says why.
+
+```md
+## Worked Example
+
+Make every row in `order_items` point to an order that exists.
+
+1. Name the referring column and the column it refers to: `order_items.order_id` refers to `orders.id`. Why: the constraint goes on the table that does the referring.
+2. Check that `orders.id` is the primary key. Why: a foreign key can only refer to a primary key or a unique column.
+3. Add the constraint: `ALTER TABLE order_items ADD FOREIGN KEY (order_id) REFERENCES orders (id);`. Why: from now on the database refuses an item whose order does not exist.
+4. Check it: insert an item with `order_id = 999` when there is no order 999. The insert fails, so the constraint works.
+
+## Practice
+
+Make every row in `payments` point to an order that exists, and say how you would check it.
+
+<details>
+<summary>Answer</summary>
+
+`ALTER TABLE payments ADD FOREIGN KEY (order_id) REFERENCES orders (id);` Then insert a payment for an order that does not exist; it should fail.
+
+</details>
+```
+
 ## Exercise Answer Block
 
 ```md
@@ -51,6 +77,21 @@ Use a foreign key from `orders(customer_id)` to `customers(id)`.
 <summary>When should a course add a glossary term?</summary>
 
 When the learner asks for it, when it becomes central across lessons, or when confusing it with a nearby term would cause real misunderstanding.
+
+</details>
+```
+
+## Distinction Card
+
+`WHERE` (lesson 2.1) and `HAVING` (lesson 3.2) are easy to confuse, so other lessons sit between them. The section that teaches `HAVING` gets one card that contrasts them:
+
+```html
+<details>
+<summary>A report should list only customers with more than 3 orders. WHERE or HAVING, and why?</summary>
+
+`HAVING`: the condition is on each group's count, and `WHERE` filters rows before they are grouped.
+
+Source lessons: [[02 Filtering/01 Filtering Rows|Filtering Rows]], [[03 Grouping/02 Filtering Groups|Filtering Groups]]
 
 </details>
 ```
