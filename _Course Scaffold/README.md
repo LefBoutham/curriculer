@@ -16,7 +16,7 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 
 ## Suggested Setup Flow
 
-1. Copy this folder into a downstream/local learning workspace.
+1. Copy this folder into a downstream/local learning workspace. The workspace root also needs the `course-study-coach` skill in `.agents/skills/` and `.claude/skills/`, as "How To Use It" in the Curriculer README shows. Open the agent at the workspace root.
 2. Rename the copy to the course name.
 3. Open `00 Course Setup Grill.md` with an LLM.
 4. Answer the grill questions one at a time.
