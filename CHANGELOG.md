@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.5.1
+
+- The README's "How To Use It" now copies the `course-study-coach` skill into the learning workspace, in `.agents/skills/` with a `.claude/skills/` link, as well as the scaffold. It says to open the agent at the workspace root, and how to copy the skill on Windows. Before, a workspace set up from the README had courses but no skill. `AGENTS.md`, `00 Courses Index.md` and `_Course Scaffold/README.md` say the same.
+
+Upgrading an existing learning workspace: courses need no change. If the agent doesn't know `course-study-coach`, copy the skill into the workspace root as "How To Use It" shows.
+
 ## v0.5.0
 
 - Lessons now teach with a worked example. The lesson template's "Example" is now "Worked Example": one concrete problem solved in numbered steps, each saying why. "Practice" follows as a similar task with different details that the learner does alone, with its answer in a `<details>` block. The tutor goes through the worked example one step at a time, and goes straight to practice when the learner can already do the task.

@@ -25,7 +25,7 @@ Start from `_Course Scaffold/`, but copy it into a downstream/local learning wor
 
 Default setup flow:
 
-1. Copy `_Course Scaffold/` to a new top-level folder named after the course in a downstream/local learning workspace.
+1. Copy `_Course Scaffold/` to a new top-level folder named after the course in a downstream/local learning workspace. If the workspace root has no `.agents/skills/course-study-coach/` yet, copy the skill there too, with the `.claude/skills/course-study-coach` link, as "How To Use It" in `README.md` shows.
 2. Rename scaffold placeholders in the copied course:
    - `00 Curriculum Index.md`
    - `CONTEXT.md`

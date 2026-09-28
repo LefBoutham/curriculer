@@ -76,11 +76,24 @@ The base repository does not contain real courses or learner history.
 
 ## How To Use It
 
-Copy the scaffold into a separate learning workspace:
+A learning workspace is a separate folder for your courses. From the root of
+this repository, copy the `course-study-coach` skill into it, where Codex and
+Claude Code look for it, and copy the scaffold into it as a course:
 
 ```sh
+mkdir -p "/path/to/learning-workspace/.agents/skills" "/path/to/learning-workspace/.claude/skills"
+cp -R .agents/skills/course-study-coach "/path/to/learning-workspace/.agents/skills/"
+ln -s ../../.agents/skills/course-study-coach "/path/to/learning-workspace/.claude/skills/course-study-coach"
 cp -R "_Course Scaffold" "/path/to/learning-workspace/My Course"
 ```
+
+On Windows, a link needs Developer Mode or an administrator shell. Instead of
+the `ln -s` line, copy the skill folder into `.claude/skills/` as well, and
+replace both copies when you upgrade.
+
+Open your agent at the workspace root, the folder that holds `.agents/`,
+`.claude/` and your course folders, so it finds the skill and sees every course.
+For another course, run only the last `cp` line again with a new name.
 
 Then:
 
