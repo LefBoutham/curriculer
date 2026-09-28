@@ -38,13 +38,13 @@ Recommended answer: name explicit exclusions so the course does not sprawl.
 
 What are the first 3 to 6 sections?
 
-Recommended answer: organize sections by learning dependency, not source order.
+Recommended answer: organize sections by learning dependency, not source order. Keep concepts that are easy to confuse apart: put at least one other lesson between them, and give the later one's section a flashcard or exercise that tells them apart.
 
 ### 5. Lesson Granularity
 
 How small should each lesson be?
 
-Recommended answer: one concept, operation, or skill per lesson.
+Recommended answer: one concept, operation, or skill per lesson, small enough for one worked example and one practice task.
 
 ### 6. Practice Shape
 

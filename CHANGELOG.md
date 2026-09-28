@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.0
+
+- Lessons now teach with a worked example. The lesson template's "Example" is now "Worked Example": one concrete problem solved in numbered steps, each saying why. "Practice" follows as a similar task with different details that the learner does alone, with its answer in a `<details>` block. The tutor goes through the worked example one step at a time, and goes straight to practice when the learner can already do the task.
+- Course building keeps confusable concepts apart. When two concepts are easy to confuse, they are not taught in back-to-back lessons: at least one other lesson sits between them. The section that teaches the later one gets one flashcard or exercise that asks the learner to tell them apart. There is no new frontmatter.
+- The rules are in a new Building Lessons section of `_Course Scaffold/AGENTS.md`, and in the setup grill's Section Model and Lesson Granularity answers. Added a worked example and a distinction card to `docs/examples.md`.
+
+Upgrading an existing learning workspace: replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version. A course's own `AGENTS.md` wins over the skill, and a copied course no longer has the lesson template, so also copy the new Building Lessons section from `_Course Scaffold/AGENTS.md` into each course's `AGENTS.md`. Existing lessons can keep their "Example" section; new lessons use the new shape.
+
 ## v0.4.0
 
 - The tutor now checks prerequisites before new material. Before the first lesson of a new section, it reads the review state of the sections that section builds on: the ones named in its section index, its Curriculum Graph row, or the lesson's `prerequisites`, or else every earlier section. A reviewed set that needs practice, has confidence 2 or lower, or is overdue gets a short targeted review first, and the session close says what the check found. Sets that were never reviewed are skipped. There is no new frontmatter.
