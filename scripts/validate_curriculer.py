@@ -11,9 +11,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCAFFOLD = ROOT / "_Course Scaffold"
+SKILLS = ROOT / ".agents" / "skills"
+CLAUDE_SKILLS = ROOT / ".claude" / "skills"
 
 ALLOWED_TOP_LEVEL = {
-    ".codex",
+    ".agents",
+    ".claude",
     ".git",
     ".github",
     ".gitignore",
@@ -63,6 +66,7 @@ def main() -> int:
 
     errors: list[str] = []
     errors.extend(check_repo_shape())
+    errors.extend(check_skills())
     errors.extend(check_scaffold_structure())
     errors.extend(check_frontmatter(SCAFFOLD))
     errors.extend(check_markdown_sanity(ROOT))
@@ -92,6 +96,22 @@ def check_repo_shape() -> list[str]:
     for path in ROOT.iterdir():
         if path.name not in ALLOWED_TOP_LEVEL:
             errors.append(f"unexpected top-level item {path.name!r}; do not add real courses to this repo")
+    return errors
+
+
+def check_skills() -> list[str]:
+    errors: list[str] = []
+    names = {"course-study-coach"}
+    for folder in [SKILLS, CLAUDE_SKILLS]:
+        if folder.is_dir():
+            names.update(path.name for path in folder.iterdir() if not path.name.startswith("."))
+    for name in sorted(names):
+        skill = SKILLS / name
+        link = CLAUDE_SKILLS / name
+        if not (skill / "SKILL.md").is_file():
+            errors.append(f"missing skill file: .agents/skills/{name}/SKILL.md")
+        elif not link.is_symlink() or link.resolve() != skill.resolve():
+            errors.append(f".claude/skills/{name} must be a symlink to ../../.agents/skills/{name} so Claude Code finds the skill")
     return errors
 
 

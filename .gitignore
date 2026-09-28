@@ -2,6 +2,9 @@ __pycache__/
 *.pyc
 .DS_Store
 
+# Personal Claude Code settings.
+.claude/settings.local.json
+
 # Local scratch course workspaces. Real courses do not belong in this base repo.
 _local/
 local-courses/
