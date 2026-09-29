@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.1
+
+- The course check no longer flags a placeholder name inside a code example, such as `course: COURSE_NAME` in the frontmatter examples of a course's `AGENTS.md`, or the placeholder list in its copied `README.md`. Before, a course built from the scaffold failed on those two files even when everything else was renamed. A placeholder in frontmatter, in text or in a Dataview query still fails. `scripts/test_validate_curriculer.py` tests both.
+
+Upgrading an existing learning workspace: nothing to do. The check is in this repo's `scripts/`.
+
 ## v0.8.0
 
 This release replaces v0.6.1 and v0.7.0, which went out by mistake. v0.6.0's bridge lessons stay, now as offers, and the setup is shorter than in v0.7.0.

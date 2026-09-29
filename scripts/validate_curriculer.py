@@ -336,9 +336,29 @@ def check_course_placeholders(course: Path) -> list[str]:
     for path in course.rglob("*"):
         if path.is_file() and path.suffix in {".md", ".html"}:
             text = path.read_text(encoding="utf-8")
+            if path.suffix == ".md":
+                text = without_code_examples(text)
             if PLACEHOLDER_RE.search(text):
                 errors.append(f"{path}: copied course still contains scaffold placeholder")
     return errors
+
+
+INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
+
+
+def without_code_examples(text: str) -> str:
+    """Markdown without its code blocks and inline code, which may name a placeholder as an example. Dataview blocks run, so they stay."""
+    lines: list[str] = []
+    fence: str | None = None
+    for line in text.splitlines():
+        if line.startswith("```"):
+            fence = line[3:].strip() if fence is None else None
+            continue
+        if fence is None:
+            lines.append(INLINE_CODE_RE.sub("", line))
+        elif fence == "dataview":
+            lines.append(line)
+    return "\n".join(lines)
 
 
 def check_course_lessons(course: Path) -> list[str]:
