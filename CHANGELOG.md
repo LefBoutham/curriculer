@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.5.3
+
+- The README no longer says "Your tutor is only as good as the model and the sources you give it." The line under the opening now says only that the course is plain files you can read and correct.
+
+Upgrading an existing learning workspace: nothing to do. The scaffold, the skill and the rules are unchanged.
+
 ## v0.5.2
 
 - The README's opening line now names the methods Curriculer is built on (prerequisites, mastery, automaticity and spaced retrieval) instead of calling them "the best scientifically proven learning methods". The "Why" section explains each one and links its source. A new line under it says the tutor is only as good as the model and the sources you give it, and that the course is plain files you can read and correct.
