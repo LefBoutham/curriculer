@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -57,17 +56,12 @@ DATE_FIELDS = {"last_reviewed", "next_review", "last_studied"}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 PLACEHOLDER_RE = re.compile(r"COURSE_NAME|01 Section Template|Lesson Template|FROM \"COURSE_NAME\"")
 WIKI_LINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
-SECTION_RE = re.compile(r"^\d{2} ")
-# A lesson is `01 Title.md`. A letter after the number marks a bridge lesson added during study: `01a Title.md`.
-LESSON_RE = re.compile(r"^(\d{2})([a-z])? .+\.md$")
-SECTION_INDEX = "00 Section Index.md"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=["scaffold", "course"], default="scaffold")
     parser.add_argument("--course", type=Path, help="Copied course folder for --mode course")
-    parser.add_argument("--since", help="With --mode course: a git commit; fail if a lesson the course had then is gone")
     args = parser.parse_args()
 
     errors: list[str] = []
@@ -81,16 +75,11 @@ def main() -> int:
 
     if args.mode == "scaffold":
         errors.extend(check_scaffold_placeholders())
-        if args.since:
-            errors.append("--since works only with --mode course")
     else:
         if not args.course:
             errors.append("--course is required with --mode course")
         else:
             errors.extend(check_course_placeholders(args.course))
-            errors.extend(check_course_lessons(args.course))
-            if args.since:
-                errors.extend(check_lessons_kept(args.course, args.since))
 
     if errors:
         print("Curriculer validation failed:", file=sys.stderr)
@@ -338,86 +327,6 @@ def check_course_placeholders(course: Path) -> list[str]:
             text = path.read_text(encoding="utf-8")
             if PLACEHOLDER_RE.search(text):
                 errors.append(f"{path}: copied course still contains scaffold placeholder")
-    return errors
-
-
-def check_course_lessons(course: Path) -> list[str]:
-    """Check that each bridge lesson is placed, marked, and linked as Bridge Lessons in AGENTS.md says."""
-    errors: list[str] = []
-    if not course.is_dir():
-        return errors
-    index = course / "00 Curriculum Index.md"
-    course_index = index.read_text(encoding="utf-8") if index.is_file() else ""
-    for section in sorted(path for path in course.iterdir() if path.is_dir() and SECTION_RE.match(path.name)):
-        lessons = [(path, LESSON_RE.match(path.name)) for path in sorted(section.glob("*.md")) if path.name != SECTION_INDEX]
-        numbers = {match.group(1) for path, match in lessons if match and not match.group(2)}
-        seen: set[str] = set()
-        for path, match in lessons:
-            if not match or not match.group(2):
-                continue
-            number, letter = match.groups()
-            stem = path.stem
-            if number + letter in seen:
-                errors.append(f"{path}: another bridge lesson is numbered {number}{letter}; use the next free letter")
-            seen.add(number + letter)
-            if number != "00" and number not in numbers:
-                errors.append(f"{path}: no lesson {number} in this section; a bridge lesson takes the number of the lesson before it")
-            data = parse_frontmatter(path)
-            if data is None:
-                errors.append(f"{path}: missing frontmatter")
-                continue
-            if data.get("type") != "lesson":
-                errors.append(f"{path}: lesson type must be 'lesson'")
-            if data.get("study_status") not in STUDY_STATUS:
-                errors.append(f"{path}: invalid study_status {data.get('study_status')!r}")
-            needed_by = [link_stem(raw) for raw in WIKI_LINK_RE.findall(data.get("added_for", ""))]
-            if not needed_by:
-                errors.append(f'{path}: added_for must link the lesson that needed it, such as "[[02 Left Join]]"')
-            elif not (section / f"{needed_by[0]}.md").is_file():
-                errors.append(f"{path}: added_for links {needed_by[0]!r}, which is not a lesson in this section")
-            if not links_to(section / SECTION_INDEX, stem):
-                errors.append(f"{section / SECTION_INDEX}: list bridge lesson {stem!r} under Lessons and Prerequisites")
-            if not links_to(section / "flashcards" / "Flashcards.md", stem):
-                errors.append(f"{section / 'flashcards' / 'Flashcards.md'}: add 2 to 4 cards whose Source lesson links bridge lesson {stem!r}")
-            if "## Curriculum Graph" in course_index and stem not in course_index:
-                errors.append(f"{index}: add bridge lesson {stem!r} to the Prerequisites cell of the {section.name!r} row in the Curriculum Graph")
-    return errors
-
-
-def link_stem(raw: str) -> str:
-    """The note a wiki link points to, without folders, alias, heading, or `.md`."""
-    target = raw.split("|", 1)[0].split("#", 1)[0].strip()
-    return target.rsplit("/", 1)[-1].removesuffix(".md")
-
-
-def links_to(path: Path, stem: str) -> bool:
-    if not path.is_file():
-        return False
-    return any(link_stem(raw) == stem for raw in WIKI_LINK_RE.findall(path.read_text(encoding="utf-8")))
-
-
-def check_lessons_kept(course: Path, since: str) -> list[str]:
-    """Repairs only add lessons, so every lesson the course had at `since` must still be there."""
-    if since.startswith("-"):
-        return [f"--since {since!r} must name a commit"]
-    try:
-        listed = subprocess.run(
-            ["git", "ls-tree", "-r", "-z", "--name-only", since, "--", "."],
-            cwd=course,
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout
-    except (OSError, subprocess.CalledProcessError) as error:
-        detail = (getattr(error, "stderr", None) or str(error)).strip()
-        return [f"--since {since}: cannot read the course at that commit: {detail}"]
-    errors: list[str] = []
-    for rel in listed.split("\0"):
-        parts = rel.split("/")
-        if len(parts) != 2 or not SECTION_RE.match(parts[0]) or parts[1] == SECTION_INDEX or not LESSON_RE.match(parts[1]):
-            continue
-        if not (course / rel).is_file():
-            errors.append(f"{course / rel}: this lesson was in the course at {since} and is gone; repairs only add lessons, never renumber, rename, move, or delete one")
     return errors
 
 

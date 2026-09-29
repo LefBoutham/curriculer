@@ -52,18 +52,7 @@ Use numbered course sections:
 04 Advanced Topics
 ```
 
-Inside each numbered section, number the lessons in order:
-
-```text
-00 Section Index.md
-01 Inner Join.md
-01a NULL Values.md
-02 Left Join.md
-```
-
-A letter after the number marks a bridge lesson, which the tutor adds during study when the learner lacks a prerequisite (Bridge Lessons in `AGENTS.md`). Lessons are never renumbered to make room.
-
-Also keep:
+Inside each numbered section, keep:
 
 ```text
 exercises/Exercises.md

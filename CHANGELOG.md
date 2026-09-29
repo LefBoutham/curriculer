@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.1
+
+- Withdraws v0.6.0, which went out by mistake after bridge lessons were put on hold. The tutor can already write a lesson and flashcards from the course's own templates; for now it should offer to, not do it on its own. The skill, the scaffold, the validator and the docs are back to v0.5.3. The v0.6.0 entry below stays as a record.
+
+Upgrading an existing learning workspace: if you installed v0.6.0, replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version, and remove the Bridge Lessons section and the Bridge Lesson entry you copied into each course's `AGENTS.md` and `CONTEXT.md`. Bridge lessons a tutor already added can stay: they are ordinary lessons with a letter after their number. If you stayed on v0.5.x, there is nothing to do.
+
 ## v0.6.0
 
 - The course grows with the learner. When the learner says they don't understand a question or what it builds on, or an answer shows a missing prerequisite, the tutor doesn't give the answer. It asks one or two short questions to find the missing prerequisite, teaches it with a worked example, asks a fresh question on it, and goes back to the question. Then it repairs the course. If a lesson already teaches the idea, the tutor adds that lesson to the `prerequisites` of the lesson that needed it and brings its flashcards back for review tomorrow. If none does, it adds one short **bridge lesson** just before the lesson that needed it, such as `01a NULL Values.md`, with 2 to 4 flashcards, and says so in one line. The rules are in the skill's new Repairing The Course section and a new Bridge Lessons section of `_Course Scaffold/AGENTS.md`.
