@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.2
+
+- The setup grill tells the tutor not to announce what it will ask next, and to skip "What's it for?" when the goal already says, such as a trip, a job, an exam or a project. In a live setup, one tutor opened with "I'll start with your experience level, then ask what it's for", and another asked what a trip to Madrid was for.
+
+Upgrading an existing learning workspace: replace its `_Course Scaffold/` with this version. Courses that are already built need no change.
+
 ## v0.8.1
 
 - The course check no longer flags a placeholder name inside a code example, such as `course: COURSE_NAME` in the frontmatter examples of a course's `AGENTS.md`, or the placeholder list in its copied `README.md`. Before, a course built from the scaffold failed on those two files even when everything else was renamed. A placeholder in frontmatter, in text or in a Dataview query still fails. `scripts/test_validate_curriculer.py` tests both.

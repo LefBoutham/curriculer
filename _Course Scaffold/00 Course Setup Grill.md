@@ -5,7 +5,7 @@ Use this note with an LLM to set up a course before building it. Keep it short a
 ## Protocol
 
 - Ask one short question at a time, in plain words, and wait for the answer.
-- Never number the questions, and never say how many there are or how many are left.
+- Never number the questions, never say how many there are or how many are left, and don't announce what you'll ask next: just ask.
 - Skip any question that the goal or an earlier answer already settles.
 - Ask the Starting Level first, then the Purpose.
 - After those two, offer to build right away, for example with the reply "Just create the course". If the learner takes it, ask nothing more: assume every answer still open, and build.
@@ -31,7 +31,7 @@ Recommended answer: start with the prerequisites the goal needs. A few diagnosti
 
 ### Purpose
 
-Ask next, for example: "What's it for: something at work, a project, or just curiosity?"
+Ask next, for example: "What's it for: something at work, a project, or just curiosity?" Skip it when the goal already says what the course is for, such as a trip, a job, an exam or a project.
 
 Recommended answer: fit the outcome, the practice, the quizzes and what's left out to it. Record it in the Outcome.
 
