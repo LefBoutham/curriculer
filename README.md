@@ -32,6 +32,13 @@ gap sends the learner back to the required knowledge or skill. Before a new
 section, the tutor looks at the review state of the sections it builds on and
 reviews any weak or overdue one first.
 
+The course grows with the learner. When a question shows a missing foundation,
+the tutor asks a question or two to find it, teaches it with a worked example,
+and checks it with a fresh question. If no lesson covers it, the tutor adds a
+short bridge lesson just before the lesson that needed it, with a few
+flashcards, so it comes back in review. It only adds: lessons are never
+renumbered, renamed or deleted.
+
 ### Spaced Retrieval
 
 Recall weakens without use. Rereading can feel familiar, but it does not always
@@ -121,6 +128,10 @@ Before you change the scaffold, run:
 ```sh
 python3 scripts/validate_curriculer.py --mode scaffold
 ```
+
+To check a course, run the same script with `--mode course --course "/path/to/learning-workspace/My Course"`.
+If the learning workspace is a Git repository, add `--since <commit>` to check
+that no lesson present at that commit was renamed, moved or deleted.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules.
 

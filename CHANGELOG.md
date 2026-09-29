@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.0
+
+- The course grows with the learner. When the learner says they don't understand a question or what it builds on, or an answer shows a missing prerequisite, the tutor doesn't give the answer. It asks one or two short questions to find the missing prerequisite, teaches it with a worked example, asks a fresh question on it, and goes back to the question. Then it repairs the course. If a lesson already teaches the idea, the tutor adds that lesson to the `prerequisites` of the lesson that needed it and brings its flashcards back for review tomorrow. If none does, it adds one short **bridge lesson** just before the lesson that needed it, such as `01a NULL Values.md`, with 2 to 4 flashcards, and says so in one line. The rules are in the skill's new Repairing The Course section and a new Bridge Lessons section of `_Course Scaffold/AGENTS.md`.
+- A bridge lesson has a letter after its number and a new `added_for` field that links the lesson that needed it. It is listed in its section index under Lessons and Prerequisites, and in its section's Curriculum Graph row. Repairs only add: lessons are never renumbered, renamed, moved, or deleted.
+- The validator now checks bridge lessons in `--mode course`: the number, `added_for`, and the links from the section index, the flashcards, and the Curriculum Graph. The new `--since <commit>` fails if a lesson the course had at that commit is gone. `scripts/test_validate_curriculer.py` tests these checks.
+- Added a **Bridge Lesson** entry to `CONTEXT.md`, and an example to `docs/examples.md`.
+
+Upgrading an existing learning workspace: replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version. A course's own `AGENTS.md` wins over the skill, so also copy the new Bridge Lessons section from `_Course Scaffold/AGENTS.md` into each course's `AGENTS.md`, and the Bridge Lesson entry into each course's `CONTEXT.md`. Existing lessons need no change. A tool that lists lessons by a number and a space should also accept one letter after the number, and sort `03` before `03a` before `04`.
+
 ## v0.5.3
 
 - The README no longer says "Your tutor is only as good as the model and the sources you give it." The line under the opening now says only that the course is plain files you can read and correct.

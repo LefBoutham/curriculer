@@ -18,6 +18,7 @@ Run:
 
 ```sh
 python3 scripts/validate_curriculer.py --mode scaffold
+python3 -m unittest discover -s scripts
 ```
 
 Before opening a change, also inspect `_Course Scaffold/01 Section Template/quizes/Quiz.html` in a browser when quiz behavior changes.
