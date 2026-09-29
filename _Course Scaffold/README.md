@@ -10,7 +10,7 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 - A `CONTEXT.md` for shared course language and boundaries.
 - An `AGENTS.md` file that tells future LLMs how to work inside the course.
 - An empty `Glossary/` folder for learner-facing term notes.
-- A course setup grill prompt file for clarifying the course before building it.
+- A short course setup grill: what to ask before building a course, and recommended answers for the rest.
 - Exercise, flashcard, and quiz templates with spaced repetition frontmatter.
 - A Dataview-friendly review dashboard.
 
@@ -18,8 +18,8 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 
 1. Copy this folder into a downstream/local learning workspace. The workspace root also needs the `course-study-coach` skill in `.agents/skills/` and `.claude/skills/`, as "How To Use It" in the Curriculer README shows. Open the agent at the workspace root.
 2. Rename the copy to the course name.
-3. Open `00 Course Setup Grill.md` with an LLM.
-4. Answer the grill questions one at a time.
+3. Tell the LLM the course goal. It runs `00 Course Setup Grill.md` with you, one short question at a time, starting with your level and your sources.
+4. It assumes the other answers, marks them as assumed, and lists them once with a section plan so you can change any. Once it has your level and sources, you can ask it to build right away.
 5. Update `CONTEXT.md` as terms and boundaries become clear.
 6. Add glossary terms only when requested or when a term needs a stable learner-facing definition.
 7. Replace `01 Section Template` with real numbered sections.

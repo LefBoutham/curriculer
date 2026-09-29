@@ -2,6 +2,32 @@
 
 These examples are short synthetic snippets. They are not a sample course and should not be expanded into one inside this repository.
 
+## Course Setup
+
+The learner starts a course with the goal "Answer questions about my shop's orders with SQL".
+
+> **Tutor:** Let's build it. Are you new to this, so we start with the prerequisites, or do you already know the basics?
+>
+> **Learner:** I know the basics.
+>
+> **Tutor:** Got a book, course or notes you want me to follow, or shall I pick the sources?
+>
+> **Learner:** You pick.
+>
+> **Tutor:** Anything you want to leave out?
+>
+> **Learner:** Just create the course.
+
+The tutor asks nothing more. It lists what it assumed in one short message, builds the course, and records each assumption in `CONTEXT.md` and the grill:
+
+```md
+**Boundary**:
+Database administration and performance tuning. (assumed by the tutor)
+
+**Quiz Style**:
+Scenario-based: a question about the orders, answered with a query. (assumed by the tutor)
+```
+
 ## Lesson Fragment
 
 ```md

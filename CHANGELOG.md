@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.7.0
+
+- The setup grill is short and friendly. The learner gives the goal. Then the tutor asks one short question at a time: the learner's starting level, then the sources to follow, then anything to leave out. It never numbers the questions or says how many are left. Then it proposes a section plan and asks whether to build it.
+- The tutor no longer asks about lesson size, practice shape, exercise, flashcard and quiz style, review cadence, completion standard, maintenance or the glossary. It gives each its recommended answer, fitted to the goal, and ends it with "(assumed by the tutor)" in `CONTEXT.md` and the grill. It lists them once, with the plan, so the learner can change any.
+- Once the starting level and sources are answered, the learner can ask to build right away, for example with "Just create the course". The tutor then assumes every answer still open and builds.
+- `00 Course Setup Grill.md` has unnumbered headings in three groups (Ask, Propose, Defaults) and an Answer line under each. `CONTEXT.md` keeps its Course Contract fields and says how assumed answers are marked. Added a setup example to `docs/examples.md`.
+
+Upgrading an existing learning workspace: replace its `_Course Scaffold/` with this version, and replace the setup-grill step in the workspace's root `AGENTS.md` ("Use `00 Course Setup Grill.md` to clarify …") with step 3 of "Creating A New Course" in this repo's `AGENTS.md`. Courses that are already built need no change, and a course still being set up can keep its own copy of the grill. The skill is unchanged.
+
 ## v0.6.1
 
 - Withdraws v0.6.0, which went out by mistake after bridge lessons were put on hold. The tutor can already write a lesson and flashcards from the course's own templates; for now it should offer to, not do it on its own. The skill, the scaffold, the validator and the docs are back to v0.5.3. The v0.6.0 entry below stays as a record.

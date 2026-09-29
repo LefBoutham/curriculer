@@ -1,101 +1,132 @@
 # Course Setup Grill
 
-Use this note with an LLM before generating or expanding a course. Ask one question at a time. After each answer, update `CONTEXT.md` if a term, relationship, or boundary becomes clear.
+Use this note with an LLM to set up a course before building it. Keep it short and friendly: ask only what changes what gets built, give everything else its recommended answer, and build.
 
 ## Protocol
 
-For each question:
+- Ask one short question at a time, in plain words, and wait for the answer.
+- Never number the questions, and never say how many there are or how many are left.
+- Ask in the order below: Starting Level, then Sources, then Boundary. Then propose the Section Plan. Don't ask the Defaults.
+- Once the learner has answered Starting Level and Sources, they can ask you to build right away, for example with "Just create the course". Then ask nothing more: assume every answer still open, and build. If they ask sooner, ask only what is still open of those two first.
+- To assume an answer, take its recommended answer, fit it to the goal and the answers so far, and end it with "(assumed by the tutor)".
+- List the assumed answers once, in one short message, a few words each, so the learner can change any of them. Put the list in the same message as the Section Plan.
+- Record every answer, given or assumed, on the Answer line under its heading below, and in its `CONTEXT.md` Course Contract field when it has one. Add the sources the learner names to `_attachments/00 Source Index.md`.
+- Resolve terminology conflicts against `CONTEXT.md`. Create an ADR only when a decision is hard to reverse, surprising, and trade-off-driven.
 
-1. Ask the question.
-2. Provide the recommended answer.
-3. Wait for the learner's response.
-4. Resolve terminology conflicts against `CONTEXT.md`.
-5. Update the relevant `CONTEXT.md` Course Contract field or language definition immediately.
-6. Update `_attachments/00 Source Index.md` when source policy names trusted sources.
-7. Create an ADR only when the decision is hard to reverse, surprising, and trade-off-driven.
+## Ask
 
-## Questions
+### Goal
 
-### 1. Course Outcome
+The learner gives the goal when they start the course. Ask for it only when it is missing or unclear: "What do you want to be able to do when you finish?"
 
-What should the learner be able to do after finishing this course?
+Recommended answer: one practical outcome, not a topic list.
 
-Recommended answer: define one practical outcome, not a topic list.
+Course Contract: **Outcome**.
 
-### 2. Target Learner
+Answer:
 
-Who is this course for, and what can they already do?
+### Starting Level
 
-Recommended answer: specify prerequisites and assumed fluency.
+Ask first, for example: "Let's build it. Are you new to this, so we start with the prerequisites, or do you already know the basics?" Any answer is fine, such as "I know the basics".
 
-### 3. Course Boundary
+Recommended answer: start with the prerequisites the goal needs. A few diagnostic questions during study confirm the starting point.
 
-What belongs outside this course even if it is related?
+Course Contract: **Target Learner**.
 
-Recommended answer: name explicit exclusions so the course does not sprawl.
+Answer:
 
-### 4. Section Model
+### Sources
 
-What are the first 3 to 6 sections?
+Ask next, for example: "Got a book, course or notes you want me to follow, or shall I pick the sources?"
 
-Recommended answer: organize sections by learning dependency, not source order. Keep concepts that are easy to confuse apart: put at least one other lesson between them, and give the later one's section a flashcard or exercise that tells them apart.
+Recommended answer: pick canonical sources for the subject and list them in `_attachments/00 Source Index.md`. Generated explanations are secondary.
 
-### 5. Lesson Granularity
+Course Contract: **Source Policy**.
 
-How small should each lesson be?
+Answer:
+
+### Boundary
+
+Ask next: "Anything you want to leave out?"
+
+Recommended answer: leave out what the goal doesn't need, and name it, so the course does not sprawl.
+
+Course Contract: **Boundary**.
+
+Answer:
+
+## Propose
+
+### Section Plan
+
+Don't ask for it. Propose 3 to 6 sections, with the assumed answers in the same short message: "Here's the plan: 1. … 2. … 3. … I've assumed the rest, and you can change any of it: … Shall I build it?"
+
+Recommended answer: order sections by learning dependency, not source order. Keep concepts that are easy to confuse apart: put at least one other lesson between them, and give the later one's section a flashcard or exercise that tells them apart.
+
+Answer:
+
+## Defaults
+
+Don't ask these. Assume each one, and list them with the Section Plan.
+
+### Lesson Size
 
 Recommended answer: one concept, operation, or skill per lesson, small enough for one worked example and one practice task.
 
-### 6. Practice Shape
+Answer:
 
-Should practice be recall, coding, writing, problem solving, or mixed?
+### Practice Shape
 
-Recommended answer: match practice to the final course outcome.
+Recommended answer: match practice to the goal: recall, coding, writing, problem solving, or a mix.
 
-### 7. Exercise Style
+Course Contract: **Practice Shape**.
 
-What should section exercises ask the learner to produce?
+Answer:
 
-Recommended answer: require a concrete answer, command, explanation, artifact, or solution that proves the learner can apply the lesson material.
+### Exercise Style
 
-### 8. Flashcard Style
+Recommended answer: ask for a concrete answer, command, explanation, artifact, or solution that proves the learner can apply the lesson material.
 
-Should flashcards test definitions, distinctions, procedures, examples, or mistakes?
+Answer:
+
+### Flashcard Style
 
 Recommended answer: prefer distinctions, procedures, and mistake correction over bare definitions.
 
-### 9. Quiz Style
+Answer:
 
-Should quizzes be multiple choice, short answer, scenario-based, or artifact-based?
+### Quiz Style
 
-Recommended answer: use scenario-based questions when the course teaches applied skills.
+Recommended answer: scenario-based questions when the course teaches applied skills; short answer otherwise.
 
-### 10. Review Cadence
+Course Contract: **Quiz Style**.
 
-Should the default spaced repetition schedule be changed?
+Answer:
 
-Recommended answer: keep the default unless the material is especially dense or high stakes.
+### Review Cadence
 
-### 11. Source Policy
+Recommended answer: keep the default schedule unless the material is especially dense or high stakes.
 
-What source material should the course trust?
+Answer:
 
-Recommended answer: list canonical sources and mark generated explanations as secondary.
-
-### 12. Completion Standard
-
-What counts as finishing a section?
+### Completion Standard
 
 Recommended answer: the learner can explain the key ideas, complete the exercises, and pass the quiz without substantial hints.
 
-### 13. Maintenance Rule
+Course Contract: **Completion Standard**.
 
-When should the course be revised?
+Answer:
+
+### Maintenance Rule
 
 Recommended answer: revise when a source changes, the learner repeatedly misses the same idea, or the course language becomes ambiguous.
 
-### 14. Glossary Rule
+Course Contract: **Maintenance Rule**.
 
-Which terms deserve glossary notes?
+Answer:
 
-Recommended answer: add a glossary note when the learner explicitly asks for a term, when a term is central to several lessons, or when confusing it with nearby terms would cause real misunderstanding.
+### Glossary Rule
+
+Recommended answer: add a glossary note when the learner asks for a term, when a term is central to several lessons, or when confusing it with nearby terms would cause real misunderstanding.
+
+Answer:

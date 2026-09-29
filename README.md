@@ -100,9 +100,13 @@ For another course, run only the last `cp` line again with a new name.
 
 Then:
 
-1. Open `00 Course Setup Grill.md` and define the goal, scope, and learner.
+1. Tell the agent your goal. It sets the course up with `00 Course Setup Grill.md`:
+   one short question at a time, starting with your level and your sources. It
+   fills in the rest with recommended answers you can change.
 2. Add source material to `_attachments/` or give the agent suggested topics.
-3. Ask the agent to map prerequisites and build the numbered course sections.
+3. Say yes to the section plan it proposes, or say "Just create the course" once
+   it has your level and sources. The agent maps prerequisites and builds the
+   numbered course sections.
 4. Use `course-study-coach` to learn, practice, review, and take quizzes.
 5. Let the agent update progress and review dates from study evidence.
 

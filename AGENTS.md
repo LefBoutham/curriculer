@@ -33,7 +33,7 @@ Default setup flow:
    - `00 Review Dashboard.md`
    - `Glossary/00 Glossary Index.md`
    - section lesson, exercise, flashcard, and quiz frontmatter
-3. Use `00 Course Setup Grill.md` to clarify the course goal, audience, scope, and section plan.
+3. Run `00 Course Setup Grill.md` with the learner: one short question at a time, starting with their level and then their sources. Never number the questions or say how many are left. Assume the other answers, mark them as assumed, and propose the section plan. Once the level and sources are answered, the learner can ask you to build right away.
 4. Replace `01 Section Template/` with real numbered course sections.
 5. Keep changes local to the copied course folder unless the user explicitly asks to alter the scaffold or repository conventions.
 

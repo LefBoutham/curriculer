@@ -11,7 +11,7 @@ Help the learner build and study a coherent course. Preserve the course language
 ## Required Context Files
 
 - Read `CONTEXT.md` before making structural or terminology changes.
-- Use `00 Course Setup Grill.md` when the course direction is unclear.
+- Use `00 Course Setup Grill.md` to set up the course, and again when the course direction is unclear. Answers ending in "(assumed by the tutor)" were not given by the learner.
 - Use `docs/adr/` only for hard-to-reverse, surprising, trade-off-driven decisions.
 
 ## Course Structure
