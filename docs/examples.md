@@ -4,28 +4,24 @@ These examples are short synthetic snippets. They are not a sample course and sh
 
 ## Course Setup
 
-The learner starts a course with the goal "Answer questions about my shop's orders with SQL".
+The learner starts a course with the goal "Answer questions about my shop's orders with SQL". The goal already says what it's for, so the tutor doesn't ask.
 
-> **Tutor:** Let's build it. Are you new to this, so we start with the prerequisites, or do you already know the basics?
+> **Tutor:** Let's build it. Are you new to this and want the prerequisites first, or shall we start at the basics?
 >
-> **Learner:** I know the basics.
+> **Learner:** Start at the basics.
 >
-> **Tutor:** Got a book, course or notes you want me to follow, or shall I pick the sources?
->
-> **Learner:** You pick.
->
-> **Tutor:** Anything you want to leave out?
+> **Tutor:** Anything you want me to follow, like a book, a course or your notes?
 >
 > **Learner:** Just create the course.
 
-The tutor asks nothing more. It lists what it assumed in one short message, builds the course, and records each assumption in `CONTEXT.md` and the grill:
+The tutor asks nothing more. It builds the course and ends with one sentence about what it assumed: "I used the usual choices for lesson size, quizzes and reviews; say if you'd like any changed." `CONTEXT.md` then has, among others:
 
 ```md
+**Target Learner**:
+Knows what a table and a row are; starts at the basics of SELECT.
+
 **Boundary**:
 Database administration and performance tuning. (assumed by the tutor)
-
-**Quiz Style**:
-Scenario-based: a question about the orders, answered with a query. (assumed by the tutor)
 ```
 
 ## Lesson Fragment
@@ -190,6 +186,34 @@ confidence: 2
 ```
 
 `02 Relational Modeling/exercises/Exercises.md` is `not started`, so it is skipped. The quiz is weak (confidence 2), and the flashcards are overdue. The tutor asks a few questions from the quiz, then from the flashcards, updates both sets, and then starts the lesson. The session close says: "Before Joins: reviewed the Relational Modeling quiz (confidence 2) and the overdue Tables And Rows flashcards."
+
+## Bridge Lesson
+
+In `03 Joins/02 Left Join`, the tutor asks what a left join returns for a customer with no orders. The learner answers with the reply "I don't understand the question or what it builds on".
+
+The tutor doesn't give the answer. It asks: "When a row has no value in a column, what is in that column?" The learner doesn't know, so NULL is the missing prerequisite. The tutor teaches NULL with a short worked example, asks a fresh question on it, then goes back to the left join question. No lesson in the course teaches NULL, so the tutor offers: "Shall I add a short lesson on NULL values before this one, with a few flashcards?" The learner answers with the reply "Yes, add it to my course", so the tutor:
+
+- adds `03 Joins/01a NULL Values.md`, with `order: 3.1a` and `added_for: "[[02 Left Join]]"`;
+- adds three cards to `03 Joins/flashcards/Flashcards.md`, each with `Source lesson: [[../01a NULL Values|NULL Values]]`, sets that set's `next_review` to tomorrow, and adds "New cards: 01a NULL Values." to its `notes`;
+- lists the lesson in the section index and in the Prerequisites cell of the `03 Joins` row of the Curriculum Graph;
+- adds it to the `prerequisites` of `02 Left Join`;
+- says: "I've added a short lesson on NULL values before this one, with three flashcards."
+
+The section index after the repair:
+
+```md
+## Prerequisites
+
+- [[01a NULL Values|NULL Values]] (bridge lesson for Left Join)
+
+## Lessons
+
+- [[01 Inner Join|Inner Join]]
+- [[01a NULL Values|NULL Values]]
+- [[02 Left Join|Left Join]]
+```
+
+No lesson was renumbered or renamed. Had the learner said no, the tutor would have changed nothing and named the gap in the session close. If the course had a lesson on NULL, the tutor would have added that lesson to the `prerequisites` of `02 Left Join` and set its study set's `next_review` to tomorrow instead.
 
 ## Quiz Question Object
 

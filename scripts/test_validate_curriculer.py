@@ -1,0 +1,113 @@
+"""Tests for the validator's course checks: python3 -m unittest discover -s scripts"""
+
+from __future__ import annotations
+
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+import validate_curriculer as validate
+
+BRIDGE = """---
+type: lesson
+title: "NULL Values"
+section: "03 Joins"
+source:
+order: 3.1a
+added_for: "[[02 Left Join]]"
+study_status: studied
+last_studied: 2026-05-25
+study_count: 1
+prerequisites:
+depends_on:
+mastery_evidence:
+---
+# NULL Values
+"""
+
+LESSON = """---
+type: lesson
+title: "{title}"
+study_status: not started
+---
+# {title}
+"""
+
+
+def write(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
+class CourseLessons(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.course = Path(self.tmp.name) / "SQL"
+        joins = self.course / "03 Joins"
+        write(self.course / "00 Curriculum Index.md", "# SQL\n\n## Curriculum Graph\n\n| Section | Prerequisites |\n| --- | --- |\n| 03 Joins | 01a NULL Values |\n")
+        write(joins / "00 Section Index.md", "# 03 Joins\n\n## Prerequisites\n\n- [[01a NULL Values]]\n\n## Lessons\n\n- [[01 Inner Join]]\n- [[01a NULL Values|NULL Values]]\n- [[02 Left Join]]\n")
+        write(joins / "01 Inner Join.md", LESSON.format(title="Inner Join"))
+        write(joins / "01a NULL Values.md", BRIDGE)
+        write(joins / "02 Left Join.md", LESSON.format(title="Left Join"))
+        write(joins / "flashcards" / "Flashcards.md", "<details>\n<summary>What is NULL?</summary>\n\nNo value.\n\nSource lesson: [[../01a NULL Values|NULL Values]]\n\n</details>\n")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def errors(self) -> str:
+        return "\n".join(validate.check_course_lessons(self.course))
+
+    def test_a_linked_bridge_lesson_passes(self) -> None:
+        self.assertEqual(self.errors(), "")
+
+    def test_a_course_without_bridge_lessons_passes(self) -> None:
+        (self.course / "03 Joins" / "01a NULL Values.md").unlink()
+        self.assertEqual(self.errors(), "")
+
+    def test_a_bridge_lesson_needs_its_origin(self) -> None:
+        write(self.course / "03 Joins" / "01a NULL Values.md", BRIDGE.replace('added_for: "[[02 Left Join]]"', "added_for:"))
+        self.assertIn("added_for must link the lesson that needed it", self.errors())
+        write(self.course / "03 Joins" / "01a NULL Values.md", BRIDGE.replace("02 Left Join", "09 Outer Join"))
+        self.assertIn("not a lesson in this section", self.errors())
+
+    def test_a_bridge_lesson_needs_its_links(self) -> None:
+        write(self.course / "00 Curriculum Index.md", "# SQL\n\n## Curriculum Graph\n\n| Section | Prerequisites |\n| --- | --- |\n| 03 Joins | None |\n")
+        write(self.course / "03 Joins" / "00 Section Index.md", "# 03 Joins\n")
+        write(self.course / "03 Joins" / "flashcards" / "Flashcards.md", "# Flashcards\n")
+        errors = self.errors()
+        self.assertIn("list bridge lesson '01a NULL Values' under Lessons", errors)
+        self.assertIn("add 2 to 4 cards", errors)
+        self.assertIn("Curriculum Graph", errors)
+
+    def test_a_bridge_lesson_follows_a_lesson_of_its_number(self) -> None:
+        (self.course / "03 Joins" / "01a NULL Values.md").rename(self.course / "03 Joins" / "05a NULL Values.md")
+        self.assertIn("no lesson 05 in this section", self.errors())
+
+    def test_00a_comes_before_the_first_lesson(self) -> None:
+        (self.course / "03 Joins" / "01a NULL Values.md").rename(self.course / "03 Joins" / "00a NULL Values.md")
+        for name in ["00 Section Index.md", "flashcards/Flashcards.md"]:
+            path = self.course / "03 Joins" / name
+            write(path, path.read_text(encoding="utf-8").replace("01a NULL", "00a NULL"))
+        write(self.course / "00 Curriculum Index.md", (self.course / "00 Curriculum Index.md").read_text(encoding="utf-8").replace("01a", "00a"))
+        self.assertEqual(self.errors(), "")
+
+    def test_since_finds_a_renamed_lesson(self) -> None:
+        git = lambda *args: subprocess.run(["git", *args], cwd=self.tmp.name, check=True, capture_output=True)
+        git("init", "-q")
+        git("add", ".")
+        git("-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-q", "-m", "course")
+        self.assertEqual(validate.check_lessons_kept(self.course, "HEAD"), [])
+        write(self.course / "03 Joins" / "01b Outer Rows.md", BRIDGE)
+        self.assertEqual(validate.check_lessons_kept(self.course, "HEAD"), [])
+        (self.course / "03 Joins" / "02 Left Join.md").rename(self.course / "03 Joins" / "03 Left Join.md")
+        errors = validate.check_lessons_kept(self.course, "HEAD")
+        self.assertEqual(len(errors), 1)
+        self.assertIn("02 Left Join.md: this lesson was in the course at HEAD and is gone", errors[0])
+
+    def test_since_needs_git_history(self) -> None:
+        self.assertIn("cannot read the course", validate.check_lessons_kept(self.course, "HEAD")[0])
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -45,8 +45,12 @@ A single focused note that teaches one concept, operation, or skill.
 _Avoid_: Page, article, content item
 
 **Prerequisite**:
-A section whose material a later section builds on. A section names its prerequisites in its section index or its Curriculum Graph row. When it names none, every earlier section is a prerequisite.
+A section whose material a later section builds on. A section names its prerequisites in its section index or its Curriculum Graph row. When it names no other section, every earlier section is a prerequisite.
 _Avoid_: Requirement
+
+**Bridge Lesson**:
+A short lesson the LLM offers during study, when the learner lacks a prerequisite that no lesson teaches, and adds just before the lesson that needed it when the learner agrees. A letter follows its number, such as `01a`, and its `added_for` links the lesson that needed it.
+_Avoid_: Remedial lesson, extra lesson
 
 **Exercise Set**:
 A reviewable collection of applied practice for one section.
@@ -97,6 +101,7 @@ _Avoid_: Failed, bad
 - A **Course** contains one or more **Sections**.
 - A **Section** contains one or more **Lessons**.
 - A **Section** builds on its **Prerequisites**. Before the first **Lesson** of a new **Section**, a weak **Review State** in a **Prerequisite** is reviewed first.
+- A **Bridge Lesson** is added to a **Section** during study, when the learner agrees. Adding one never renumbers, renames, moves, or deletes a **Lesson**.
 - A **Section** has one **Exercise Set** by default.
 - A **Section** has one **Study Set** by default.
 - A **Section** has one **Quiz** by default.

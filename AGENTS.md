@@ -33,7 +33,7 @@ Default setup flow:
    - `00 Review Dashboard.md`
    - `Glossary/00 Glossary Index.md`
    - section lesson, exercise, flashcard, and quiz frontmatter
-3. Run `00 Course Setup Grill.md` with the learner: one short question at a time, starting with their level and then their sources. Never number the questions or say how many are left. Assume the other answers, mark them as assumed, and propose the section plan. Once the level and sources are answered, the learner can ask you to build right away.
+3. Run `00 Course Setup Grill.md` with the learner: one short question at a time, never numbered or counted, starting with their level and then what the course is for. After those two, offer to build right away. Otherwise ask about sources only when `_attachments/` is empty, then propose the section plan. Give every other answer its recommended value, marked as assumed, and mention them in one sentence.
 4. Replace `01 Section Template/` with real numbered course sections.
 5. Keep changes local to the copied course folder unless the user explicitly asks to alter the scaffold or repository conventions.
 
@@ -44,6 +44,8 @@ Do not modify `_Course Scaffold/` when creating a normal course. Only change the
 Follow the course-level `AGENTS.md` when one exists. If a course does not have one yet, use `_Course Scaffold/AGENTS.md` as the fallback convention.
 
 Use the repo-scoped `course-study-coach` skill in `.agents/skills/course-study-coach/` for LLM-led study sessions, reviews, exercises, study sets, quizzes, diagnostic starting-point checks, active-recall tutoring, and review metadata updates.
+
+When a learner lacks a prerequisite that no lesson teaches, the skill offers to add one short bridge lesson, such as `01a NULL Values.md`, with a few flashcards, and adds it when the learner agrees. Repairs only add: they never renumber, rename, move, or delete a lesson. The rules are under Bridge Lessons in `_Course Scaffold/AGENTS.md`.
 
 Base repository guardrails:
 

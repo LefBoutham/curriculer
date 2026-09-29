@@ -32,6 +32,13 @@ gap sends the learner back to the required knowledge or skill. Before a new
 section, the tutor looks at the review state of the sections it builds on and
 reviews any weak or overdue one first.
 
+The course grows with the learner. When a question shows a missing foundation,
+the tutor asks a question or two to find it, teaches it with a worked example,
+and checks it with a fresh question. If no lesson covers it, the tutor offers
+to add a short bridge lesson just before the lesson that needed it, with a few
+flashcards, so it comes back in review. It adds one only when you agree, and it
+never renumbers, renames or deletes a lesson.
+
 ### Spaced Retrieval
 
 Recall weakens without use. Rereading can feel familiar, but it does not always
@@ -100,12 +107,13 @@ For another course, run only the last `cp` line again with a new name.
 
 Then:
 
-1. Tell the agent your goal. It sets the course up with `00 Course Setup Grill.md`:
-   one short question at a time, starting with your level and your sources. It
-   fills in the rest with recommended answers you can change.
-2. Add source material to `_attachments/` or give the agent suggested topics.
-3. Say yes to the section plan it proposes, or say "Just create the course" once
-   it has your level and sources. The agent maps prerequisites and builds the
+1. Put any sources you want the course to follow in `_attachments/`, or let the
+   agent pick them.
+2. Tell the agent your goal. It sets the course up with `00 Course Setup Grill.md`:
+   one short question at a time, starting with your level and what the course is
+   for. It fills in the rest with recommended answers you can change.
+3. Say "Just create the course" after those two answers, or say yes to the
+   section plan it proposes. The agent maps prerequisites and builds the
    numbered course sections.
 4. Use `course-study-coach` to learn, practice, review, and take quizzes.
 5. Let the agent update progress and review dates from study evidence.
@@ -125,6 +133,10 @@ Before you change the scaffold, run:
 ```sh
 python3 scripts/validate_curriculer.py --mode scaffold
 ```
+
+To check a course, run the same script with `--mode course --course "/path/to/learning-workspace/My Course"`.
+If the learning workspace is a Git repository, add `--since <commit>` to check
+that no lesson present at that commit was renamed, moved or deleted.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules.
 

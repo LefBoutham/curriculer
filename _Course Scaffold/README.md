@@ -18,8 +18,8 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 
 1. Copy this folder into a downstream/local learning workspace. The workspace root also needs the `course-study-coach` skill in `.agents/skills/` and `.claude/skills/`, as "How To Use It" in the Curriculer README shows. Open the agent at the workspace root.
 2. Rename the copy to the course name.
-3. Tell the LLM the course goal. It runs `00 Course Setup Grill.md` with you, one short question at a time, starting with your level and your sources.
-4. It assumes the other answers, marks them as assumed, and lists them once with a section plan so you can change any. Once it has your level and sources, you can ask it to build right away.
+3. Tell the LLM the course goal. It runs `00 Course Setup Grill.md` with you, one short question at a time, starting with your level and what the course is for.
+4. After those two, you can ask it to build right away. Otherwise it asks about sources when `_attachments/` is empty, and proposes a section plan. It gives every other answer its recommended value, marked as assumed, so you can change any of them later.
 5. Update `CONTEXT.md` as terms and boundaries become clear.
 6. Add glossary terms only when requested or when a term needs a stable learner-facing definition.
 7. Replace `01 Section Template` with real numbered sections.
@@ -52,7 +52,18 @@ Use numbered course sections:
 04 Advanced Topics
 ```
 
-Inside each numbered section, keep:
+Inside each numbered section, number the lessons in order:
+
+```text
+00 Section Index.md
+01 Inner Join.md
+01a NULL Values.md
+02 Left Join.md
+```
+
+A letter after the number marks a bridge lesson, which the tutor offers during study when the learner lacks a prerequisite, and adds when the learner agrees (Bridge Lessons in `AGENTS.md`). Lessons are never renumbered to make room.
+
+Also keep:
 
 ```text
 exercises/Exercises.md
