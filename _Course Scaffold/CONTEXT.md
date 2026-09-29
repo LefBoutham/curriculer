@@ -4,6 +4,8 @@ This context defines the shared language for building repeatable Obsidian course
 
 ## Course Contract
 
+The setup grill fills these fields. An answer the learner didn't give ends with "(assumed by the tutor)", and the learner can change it at any time.
+
 **Outcome**:
 What the learner should be able to do after finishing this course.
 
