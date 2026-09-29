@@ -204,6 +204,35 @@ A lesson starts a new section when no lesson in that section has `study_status: 
 - If a prerequisite set is weak, give a short targeted review of the weakest sets first (lowest confidence, then the oldest `next_review`; two or three sets at most), update their review metadata, then start the lesson. The learner can choose to go straight to the lesson.
 - In the session close, say which sets were weak and whether they were reviewed first.
 
+## Bridge Lessons
+
+A bridge lesson teaches a prerequisite the course was missing. The LLM adds one during study, after a short diagnosis confirms that the learner lacks a prerequisite that no lesson teaches (Repairing The Course in the `course-study-coach` skill). When a lesson already teaches it, link that lesson instead: add it to the `prerequisites` of the lesson that needed it.
+
+- **Add only.** At most one bridge lesson per confirmed gap. Never renumber, rename, move, or delete a lesson.
+- **Name and place.** The lesson that needed it is the one the question came from, such as a flashcard's source lesson. Put the bridge lesson in the same section, just before that lesson. It takes the number of the lesson before it and the next free letter: before `02 Left Join.md` it is `01a NULL Values.md`, then `01b …`. Before a section's first lesson, use `00a`.
+- **Frontmatter.** Use the lesson frontmatter. `order` is the order of the lesson before it, plus the letter, such as `3.1a`. `added_for` links the lesson that needed it, which marks the bridge lesson as added during study. Fill `source` only when a course source covers the idea. The idea was taught in the session, so record its lesson progress.
+- **Content.** Keep it short and in the lesson template's shape, with the worked example from the session. Why It Matters names the lesson that needs it.
+- **Flashcards.** Add 2 to 4 cards to the section's `flashcards/Flashcards.md`, each with a `Source lesson:` link to the bridge lesson. Set that study set's `next_review` to tomorrow, unless it is due sooner, and name the new cards in its `notes`. Leave its other review fields as they are.
+- **Links.** List it in the section index under Lessons, in order, and under Prerequisites. Add it to the Prerequisites cell of the section's Curriculum Graph row. Add it to the `prerequisites` of the lesson that needed it.
+- **Say so** in one line, for example: "I've added a short lesson on NULL values before this one, with three flashcards."
+
+```yaml
+---
+type: lesson
+title: "NULL Values"
+section: "03 Joins"
+source:
+order: 3.1a
+added_for: "[[02 Left Join]]"
+study_status: studied
+last_studied: YYYY-MM-DD
+study_count: 1
+prerequisites:
+depends_on:
+mastery_evidence:
+---
+```
+
 ## Flashcards
 
 Use Obsidian-friendly collapsible HTML:
