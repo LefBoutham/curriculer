@@ -1,6 +1,19 @@
 # Changelog
 
+## v0.8.0
+
+This release replaces v0.6.1 and v0.7.0, which went out by mistake. v0.6.0's bridge lessons stay, now as offers, and the setup is shorter than in v0.7.0.
+
+- **A short setup.** The tutor asks one short question at a time, and never numbers the questions or says how many are left. It asks the learner's starting level first, then what the course is for, and skips any question the goal already answers. After those two, the learner can ask to build right away, for example with "Just create the course". Otherwise the tutor asks about sources only when `_attachments/` is empty, proposes a section plan that names what's left out, and builds when the learner agrees.
+- **Defaults instead of questions.** The tutor never asks about lesson size, practice shape, exercise, flashcard and quiz style, review cadence, completion standard, maintenance or the glossary. It gives each its recommended answer, writes it under Current Defaults in `00 Course Setup Grill.md` and in `CONTEXT.md`, ending with "(assumed by the tutor)", and mentions them in one sentence. The grill's headings have no numbers. `CONTEXT.md` keeps its Course Contract fields.
+- **Bridge lessons are offered.** When no lesson teaches a missing prerequisite, the tutor offers a short bridge lesson and adds it only when the learner agrees. If the learner says no, nothing changes and the session close names the gap. The naming rules, `added_for` and the validator checks are v0.6.0's.
+- Added a Course Setup example to `docs/examples.md`, and the offer to its Bridge Lesson example.
+
+Upgrading an existing learning workspace: replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version, and replace the setup-grill step in the workspace's root `AGENTS.md` with step 3 of "Creating A New Course" in this repo's `AGENTS.md`. Courses that are already built keep their own setup grill, and so can a course still being set up. From v0.5.x or v0.6.1, also copy the Bridge Lessons section from `_Course Scaffold/AGENTS.md` into each course's `AGENTS.md`, and the Bridge Lesson entry into each course's `CONTEXT.md`. From v0.6.0, replace the first paragraph of each course's Bridge Lessons section and its Bridge Lesson entry with this version's.
+
 ## v0.7.0
+
+Superseded by v0.8.0.
 
 - The setup grill is short and friendly. The learner gives the goal. Then the tutor asks one short question at a time: the learner's starting level, then the sources to follow, then anything to leave out. It never numbers the questions or says how many are left. Then it proposes a section plan and asks whether to build it.
 - The tutor no longer asks about lesson size, practice shape, exercise, flashcard and quiz style, review cadence, completion standard, maintenance or the glossary. It gives each its recommended answer, fitted to the goal, and ends it with "(assumed by the tutor)" in `CONTEXT.md` and the grill. It lists them once, with the plan, so the learner can change any.
@@ -10,6 +23,8 @@
 Upgrading an existing learning workspace: replace its `_Course Scaffold/` with this version, and replace the setup-grill step in the workspace's root `AGENTS.md` ("Use `00 Course Setup Grill.md` to clarify …") with step 3 of "Creating A New Course" in this repo's `AGENTS.md`. Courses that are already built need no change, and a course still being set up can keep its own copy of the grill. The skill is unchanged.
 
 ## v0.6.1
+
+Superseded by v0.8.0, which keeps v0.6.0's bridge lessons as offers.
 
 - Withdraws v0.6.0, which went out by mistake after bridge lessons were put on hold. The tutor can already write a lesson and flashcards from the course's own templates; for now it should offer to, not do it on its own. The skill, the scaffold, the validator and the docs are back to v0.5.3. The v0.6.0 entry below stays as a record.
 
