@@ -109,5 +109,31 @@ class CourseLessons(unittest.TestCase):
         self.assertIn("cannot read the course", validate.check_lessons_kept(self.course, "HEAD")[0])
 
 
+class CoursePlaceholders(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.course = Path(self.tmp.name) / "SQL"
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def errors(self, name: str, text: str) -> list[str]:
+        write(self.course / name, text)
+        return validate.check_course_placeholders(self.course)
+
+    def test_placeholders_in_code_examples_pass(self) -> None:
+        text = "Replace `01 Section Template` with real sections.\n\n```yaml\ncourse: COURSE_NAME\n```\n\n```sh\nrg \"Lesson Template\"\n```\n"
+        self.assertEqual(self.errors("AGENTS.md", text), [])
+
+    def test_a_placeholder_in_frontmatter_fails(self) -> None:
+        self.assertTrue(self.errors("01 Basics/flashcards/Flashcards.md", "---\ntype: flashcards\ncourse: COURSE_NAME\n---\n"))
+
+    def test_a_placeholder_in_text_fails(self) -> None:
+        self.assertTrue(self.errors("00 Curriculum Index.md", "# COURSE_NAME\n"))
+
+    def test_a_placeholder_in_a_dataview_query_fails(self) -> None:
+        self.assertTrue(self.errors("00 Review Dashboard.md", "```dataview\nTABLE status\nFROM \"COURSE_NAME\"\n```\n"))
+
+
 if __name__ == "__main__":
     unittest.main()
