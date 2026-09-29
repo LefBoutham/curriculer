@@ -42,7 +42,7 @@ The learner must attempt retrieval at least once before receiving clues, explana
 4. If the answer is `clean`, acknowledge it briefly without exposing the internal label.
 5. If the answer is not `clean`, use the hint ladder below.
 6. After a hint or explanation, ask a fresh nearby retrieval prompt before marking progress.
-7. When an answer reveals confusion, classify the likely repair path: term confusion, prerequisite gap, weak application, memory decay, or source mismatch. For a prerequisite gap, follow Repairing The Course.
+7. When an answer reveals confusion, classify the likely repair path: term confusion, prerequisite gap, weak application, memory decay, or source mismatch.
 
 Prefer short prompts and frequent turns. Avoid long lectures unless the learner has already attempted retrieval and needs remediation.
 
@@ -63,21 +63,6 @@ Use warm, empathetic, concise, and informative language. Acknowledge effort with
 5. New similar prompt to verify independent recall.
 
 Do not lower the bar by accepting an answer that required the full explanation as mastered.
-
-## Repairing The Course
-
-Use this when the learner says they don't understand the question or what it builds on, in their own words or with the reply "I don't understand the question or what it builds on", or when an answer shows a prerequisite gap.
-
-1. **Don't give the answer.** Saying so counts as the learner's attempt: score it `no attempt`.
-2. **Diagnose.** Ask one or two short questions, one at a time, on what the question builds on: the lesson's `prerequisites` first, then earlier lessons. If the learner answers them cleanly, it isn't a prerequisite gap, so go back to the hint ladder.
-3. **Teach the missing idea** with a short worked example, one step at a time.
-4. **Check it.** Ask a fresh question on the missing idea. Then go back to the question the learner couldn't follow, and let them try it.
-5. **Repair the course**, once the diagnosis has confirmed which prerequisite is missing:
-   - If a lesson of the course already teaches it, add that lesson to the `prerequisites` of the lesson that needed it: the lesson the question came from. Set the `next_review` of its section's study set to tomorrow, unless it is due sooner, so its flashcards come back.
-   - If no lesson teaches it, add one bridge lesson just before the lesson that needed it, with 2 to 4 flashcards, as Bridge Lessons in the course's `AGENTS.md` says. If the course's `AGENTS.md` has no Bridge Lessons section, use the one in `_Course Scaffold/AGENTS.md`.
-   - Say what you changed in one line, for example: "I've added a short lesson on NULL values before this one, with three flashcards."
-
-Add at most one bridge lesson per confirmed gap. Never renumber, rename, move, or delete a lesson. Memory decay and term confusion don't get a bridge lesson: review repairs the first, and a glossary term or a distinction card the second.
 
 ## Activity Selection
 
@@ -174,4 +159,4 @@ When updating metadata, write only inside the selected copied course folder.
 
 ## Session Close
 
-End with what was reviewed or learned, observed weak spots, metadata changes made, lessons linked or bridge lessons added, other repair signals recorded or proposed, and the next recommended study action. If a prerequisite check ran, say which sets were weak and whether you reviewed them first or the learner chose to go straight on. Keep it short.
+End with what was reviewed or learned, observed weak spots, metadata changes made, repair signals recorded or proposed, and the next recommended study action. If a prerequisite check ran, say which sets were weak and whether you reviewed them first or the learner chose to go straight on. Keep it short.

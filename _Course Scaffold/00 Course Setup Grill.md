@@ -92,7 +92,7 @@ Recommended answer: the learner can explain the key ideas, complete the exercise
 
 When should the course be revised?
 
-Recommended answer: revise when a source changes, the learner repeatedly misses the same idea, or the course language becomes ambiguous. During study, the tutor adds a short bridge lesson when the learner lacks a prerequisite that no lesson teaches; it never renumbers or renames lessons.
+Recommended answer: revise when a source changes, the learner repeatedly misses the same idea, or the course language becomes ambiguous.
 
 ### 14. Glossary Rule
 
