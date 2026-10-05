@@ -16,16 +16,40 @@ Help the learner build and study a coherent course. Preserve the course language
 
 ## Course Structure
 
-- `00 Curriculum Index.md` is the course map.
+- `00 Curriculum Index.md` is the course map: every section and lesson, in order, including the ones not written yet (Planned Lessons).
 - `Glossary/00 Glossary Index.md` is the learner-facing term index.
 - Numbered folders are course sections.
-- Each numbered section should contain lesson notes plus:
+- Each numbered section should contain lesson notes plus the following, written as the learner reaches them (Planned Lessons):
   - `exercises/Exercises.md`
   - `flashcards/Flashcards.md`
   - `quizes/Quiz.md`
   - `quizes/Quiz.html`
 - `_attachments/` is for course assets and source files.
 - `_attachments/00 Source Index.md` is for trusted source material.
+
+## Planned Lessons
+
+The course is planned in full up front, and written as the learner goes. The first question then comes a few minutes after setup, not after the whole course is written.
+
+- **The build** writes, in one turn: the course contract (`CONTEXT.md` and the setup grill's answers), the source list, the full course map, section 1's folder with its `00 Section Index.md`, and lesson 1. The Manual Review Queue in `00 Review Dashboard.md` starts empty: no set is written yet. Then it starts lesson 1, as New Lessons in the `course-study-coach` skill says, and ends that same reply with lesson 1's first question.
+- **The map** lists every section and, under it, every lesson, in prerequisite order, with confusable concepts kept apart (Building Lessons). Give each lesson its file name now: a number and a title, such as `02 Left Join`. The Curriculum Graph has a row for every section. A section or lesson that isn't written yet is planned: plain text, not a link, as in the example below.
+- **Write a planned lesson when the learner reaches it,** in the same turn, before you teach it: from the map, `CONTEXT.md`, the lessons before it and the course's sources. Name its file with exactly the planned number and title, and use the lesson template and frontmatter. Then make it a link in the map and in its section index. For the first lesson of a planned section, first make the section's folder and `00 Section Index.md`, with every lesson the map gives it, planned ones as plain text. Write only that lesson: the next one waits until the learner reaches it.
+- **Flashcards:** when you mark a lesson studied, add its 2 to 4 cards to its section's `flashcards/Flashcards.md`, each with a `Source lesson:` link, unless it has cards there already. If the set has a `next_review`, set it to tomorrow unless it is due sooner, and name the new cards in its `notes`. Leave its other review fields as they are.
+- **Exercises and quiz:** when the learner has studied every lesson the map lists in a section, write the section's `exercises/Exercises.md` and its quiz, `quizes/Quiz.md` and `quizes/Quiz.html`, unless it has them already. Then offer them.
+- **Templates:** make each new file from its template in the workspace's `_Course Scaffold/01 Section Template/`. Without one, follow an earlier section's file of the same kind. When you write a set, list it under Study in its section index and in the Manual Review Queue of `00 Review Dashboard.md`.
+- **The rest at once:** when the learner asks to write the rest of the course now, write every planned lesson in map order, with each section's index, flashcards, exercises and quiz, and link each one as you write it.
+- Writing a planned lesson only adds, as a bridge lesson does: never renumber, rename, move, or delete a lesson.
+
+The map's Sections, with lesson 1 written and the rest planned:
+
+```md
+- [[01 Basics/00 Section Index|01 Basics]]
+  - [[01 Basics/01 Tables And Rows|01 Tables And Rows]]
+  - 02 Selecting Columns
+- 02 Joins
+  - 01 Inner Join
+  - 02 Left Join
+```
 
 ## Building Lessons
 
@@ -97,7 +121,7 @@ When a lesson has been covered in a study session:
 - Set `last_studied` to today's date in `YYYY-MM-DD`.
 - Increment `study_count` by 1.
 
-The LLM should update lesson progress frontmatter directly at the end of a study session when the learner has gone through the lesson. This progress update is separate from exercise, flashcard, or quiz review scheduling.
+The LLM should update lesson progress frontmatter directly at the end of a study session when the learner has gone through the lesson, and add the lesson's flashcards then (Planned Lessons). This progress update is separate from exercise, flashcard, or quiz review scheduling.
 
 Use lesson progress metadata to find the learner's most recent checkpoint. Keep spaced repetition scheduling on exercises, flashcards, and quizzes unless the learner asks for per-lesson review scheduling.
 

@@ -88,12 +88,14 @@ The base repository does not contain real courses or learner history.
 
 A learning workspace is a separate folder for your courses. From the root of
 this repository, copy the `course-study-coach` skill into it, where Codex and
-Claude Code look for it, and copy the scaffold into it as a course:
+Claude Code look for it. Copy the scaffold into it as it is, for the templates
+the agent writes later sections from, and again as a course:
 
 ```sh
 mkdir -p "/path/to/learning-workspace/.agents/skills" "/path/to/learning-workspace/.claude/skills"
 cp -R .agents/skills/course-study-coach "/path/to/learning-workspace/.agents/skills/"
 ln -s ../../.agents/skills/course-study-coach "/path/to/learning-workspace/.claude/skills/course-study-coach"
+cp -R "_Course Scaffold" "/path/to/learning-workspace/"
 cp -R "_Course Scaffold" "/path/to/learning-workspace/My Course"
 ```
 
@@ -113,8 +115,10 @@ Then:
    one short question at a time, starting with your level and what the course is
    for. It fills in the rest with recommended answers you can change.
 3. Say "Just create the course" after those two answers, or say yes to the
-   section plan it proposes. The agent maps prerequisites and builds the
-   numbered course sections.
+   section plan it proposes. The agent maps prerequisites into the full course
+   map, writes the first lesson, and asks its first question, a few minutes
+   later. It writes each later lesson when you reach it. Ask it to write the
+   rest now if you want the whole course at once.
 4. Use `course-study-coach` to learn, practice, review, and take quizzes.
 5. Let the agent update progress and review dates from study evidence.
 

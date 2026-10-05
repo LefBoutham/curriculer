@@ -48,6 +48,10 @@ _Avoid_: Page, article, content item
 A section whose material a later section builds on. A section names its prerequisites in its section index or its Curriculum Graph row. When it names no other section, every earlier section is a prerequisite.
 _Avoid_: Requirement
 
+**Planned Lesson**:
+A lesson the course map lists that isn't written yet. It is plain text in the map, not a link, with the number and title its file will have. The LLM writes it when the learner reaches it.
+_Avoid_: Stub, placeholder, draft
+
 **Bridge Lesson**:
 A short lesson the LLM offers during study, when the learner lacks a prerequisite that no lesson teaches, and adds just before the lesson that needed it when the learner agrees. A letter follows its number, such as `01a`, and its `added_for` links the lesson that needed it.
 _Avoid_: Remedial lesson, extra lesson
@@ -100,6 +104,7 @@ _Avoid_: Failed, bad
 
 - A **Course** contains one or more **Sections**.
 - A **Section** contains one or more **Lessons**.
+- The course map lists every **Section** and **Lesson** from the start. A **Planned Lesson** is written when the learner reaches it, its flashcards once it is studied, and its **Section**'s **Exercise Set** and **Quiz** once all the section's lessons are.
 - A **Section** builds on its **Prerequisites**. Before the first **Lesson** of a new **Section**, a weak **Review State** in a **Prerequisite** is reviewed first.
 - A **Bridge Lesson** is added to a **Section** during study, when the learner agrees. Adding one never renumbers, renames, moves, or deletes a **Lesson**.
 - A **Section** has one **Exercise Set** by default.

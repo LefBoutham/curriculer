@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.9.0
+
+- **The first lesson in minutes.** Building a course used to write every section's lessons, exercises, flashcards and quizzes before the first question, which took 13 to 17 minutes. Now the build writes the course contract, the source list, the full course map, section 1's index and lesson 1, then starts lesson 1 and asks its first question in the same reply. The plan is still made in full: every section and lesson, in prerequisite order, with confusable concepts apart.
+- **Planned lessons.** The map lists every section and, under it, every lesson, with the number and title its file will have. A lesson or section that isn't written yet is plain text, not a link. The tutor writes a planned lesson when the learner reaches it, then links it. It adds a lesson's flashcards when the learner has studied it, and a section's exercises and quiz once every lesson in it is studied. A set that already has a `next_review` comes back by tomorrow when it gets new cards, as for a bridge lesson. "Write the rest now" writes everything at once. The rules are in a new Planned Lessons section of `_Course Scaffold/AGENTS.md`, and the skill's New Lessons follows them.
+- **Templates at the workspace root.** Later sections' flashcards, exercises and quizzes are made from `_Course Scaffold/01 Section Template/` in the workspace, so "How To Use It" in the README copies the scaffold there too.
+- **The course check** (`--mode course`) now checks the map and the section indexes: a lesson linked there must be written, and a written lesson must be a link. A planned lesson, or a planned section with no folder yet, passes. `scripts/test_validate_curriculer.py` tests both.
+- Added a **Planned Lesson** entry to `CONTEXT.md`, and a Planned Lesson example to `docs/examples.md`.
+
+Upgrading an existing learning workspace: replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version, and keep `_Course Scaffold/` at the workspace root. Replace steps 1 and 4 of "Creating A New Course" in the workspace's root `AGENTS.md` with this repo's. Courses that are already built need no change: every lesson in them is written. A course still being set up can be built the new way: the skill falls back to Planned Lessons in `_Course Scaffold/AGENTS.md` when the course's own `AGENTS.md` has none.
+
 ## v0.8.2
 
 - The setup grill tells the tutor not to announce what it will ask next, and to skip "What's it for?" when the goal already says, such as a trip, a job, an exam or a project. In a live setup, one tutor opened with "I'll start with your experience level, then ask what it's for", and another asked what a trip to Madrid was for.

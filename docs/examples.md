@@ -14,7 +14,7 @@ The learner starts a course with the goal "Answer questions about my shop's orde
 >
 > **Learner:** Just create the course.
 
-The tutor asks nothing more. It builds the course and ends with one sentence about what it assumed: "I used the usual choices for lesson size, quizzes and reviews; say if you'd like any changed." `CONTEXT.md` then has, among others:
+The tutor asks nothing more. In the same turn it writes the course contract, the source list, the full course map and lesson 1, says in one sentence what it assumed ("I used the usual choices for lesson size, quizzes and reviews; say if you'd like any changed"), starts lesson 1 and ends with its first question. `CONTEXT.md` then has, among others:
 
 ```md
 **Target Learner**:
@@ -23,6 +23,15 @@ Knows what a table and a row are; starts at the basics of SELECT.
 **Boundary**:
 Database administration and performance tuning. (assumed by the tutor)
 ```
+
+## Planned Lesson
+
+The map lists `02 Selecting Columns` under `01 Basics` as plain text, so it is planned: there is no file yet. The learner studied `01 Tables And Rows` yesterday and says "next". The tutor:
+
+- writes `01 Basics/02 Selecting Columns.md` from the lesson template, with `order: 1.2`;
+- makes it a link in the map, `- [[01 Basics/02 Selecting Columns|02 Selecting Columns]]`, and in `01 Basics/00 Section Index.md`;
+- teaches it, and at the end of the session marks it studied and adds three cards with `Source lesson: [[../02 Selecting Columns|Selecting Columns]]` to `01 Basics/flashcards/Flashcards.md`;
+- sees that it was the last lesson the map lists for `01 Basics`, so it writes the section's exercises and quiz and offers them.
 
 ## Lesson Fragment
 

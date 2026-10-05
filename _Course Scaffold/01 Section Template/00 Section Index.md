@@ -12,9 +12,13 @@ Describe the outcome of this section in one sentence.
 
 ## Lessons
 
+A lesson that isn't written yet is plain text, not a link, until the learner reaches it.
+
 - [[01 Lesson Template|Lesson Template]]
 
 ## Study
+
+Each set is listed here once it is written: flashcards as lessons are studied, exercises and the quiz once every lesson is.
 
 - [[exercises/Exercises|Exercises]]
 - [[flashcards/Flashcards|Flashcards]]

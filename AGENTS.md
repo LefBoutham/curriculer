@@ -25,7 +25,7 @@ Start from `_Course Scaffold/`, but copy it into a downstream/local learning wor
 
 Default setup flow:
 
-1. Copy `_Course Scaffold/` to a new top-level folder named after the course in a downstream/local learning workspace. If the workspace root has no `.agents/skills/course-study-coach/` yet, copy the skill there too, with the `.claude/skills/course-study-coach` link, as "How To Use It" in `README.md` shows.
+1. Copy `_Course Scaffold/` to a new top-level folder named after the course in a downstream/local learning workspace. If the workspace root has no `.agents/skills/course-study-coach/` or `_Course Scaffold/` yet, copy them there too, with the `.claude/skills/course-study-coach` link, as "How To Use It" in `README.md` shows. Later sections are written from the scaffold's templates.
 2. Rename scaffold placeholders in the copied course:
    - `00 Curriculum Index.md`
    - `CONTEXT.md`
@@ -34,7 +34,7 @@ Default setup flow:
    - `Glossary/00 Glossary Index.md`
    - section lesson, exercise, flashcard, and quiz frontmatter
 3. Run `00 Course Setup Grill.md` with the learner: one short question at a time, never numbered or counted, starting with their level and then what the course is for. After those two, offer to build right away. Otherwise ask about sources only when `_attachments/` is empty, then propose the section plan. Give every other answer its recommended value, marked as assumed, and mention them in one sentence.
-4. Replace `01 Section Template/` with real numbered course sections.
+4. Build the course map and lesson 1: write the course contract, the source list, the full course map (every section and lesson, in prerequisite order), and section 1 with its first lesson in place of `01 Section Template/`. Then start lesson 1 and ask its first question in the same reply. Later lessons, their flashcards, and each section's exercises and quiz are written as the learner reaches them, as Planned Lessons in `_Course Scaffold/AGENTS.md` says.
 5. Keep changes local to the copied course folder unless the user explicitly asks to alter the scaffold or repository conventions.
 
 Do not modify `_Course Scaffold/` when creating a normal course. Only change the scaffold when improving the template itself.
@@ -42,6 +42,8 @@ Do not modify `_Course Scaffold/` when creating a normal course. Only change the
 ## Study And Review Conventions
 
 Follow the course-level `AGENTS.md` when one exists. If a course does not have one yet, use `_Course Scaffold/AGENTS.md` as the fallback convention.
+
+A lesson the course map lists as plain text is planned: the skill writes it when the learner reaches it, and then teaches it. When the learner asks for the whole course at once, it writes the rest now.
 
 Use the repo-scoped `course-study-coach` skill in `.agents/skills/course-study-coach/` for LLM-led study sessions, reviews, exercises, study sets, quizzes, diagnostic starting-point checks, active-recall tutoring, and review metadata updates.
 

@@ -16,14 +16,14 @@ Copy this folder when starting a new course. Rename the copied folder to the cou
 
 ## Suggested Setup Flow
 
-1. Copy this folder into a downstream/local learning workspace. The workspace root also needs the `course-study-coach` skill in `.agents/skills/` and `.claude/skills/`, as "How To Use It" in the Curriculer README shows. Open the agent at the workspace root.
+1. Copy this folder into a downstream/local learning workspace. Keep a copy of it at the workspace root as `_Course Scaffold/` too: the LLM makes later sections' flashcards, exercises and quizzes from its templates. The workspace root also needs the `course-study-coach` skill in `.agents/skills/` and `.claude/skills/`, as "How To Use It" in the Curriculer README shows. Open the agent at the workspace root.
 2. Rename the copy to the course name.
 3. Tell the LLM the course goal. It runs `00 Course Setup Grill.md` with you, one short question at a time, starting with your level and what the course is for.
 4. After those two, you can ask it to build right away. Otherwise it asks about sources when `_attachments/` is empty, and proposes a section plan. It gives every other answer its recommended value, marked as assumed, so you can change any of them later.
-5. Update `CONTEXT.md` as terms and boundaries become clear.
-6. Add glossary terms only when requested or when a term needs a stable learner-facing definition.
-7. Replace `01 Section Template` with real numbered sections.
-8. Add lessons, exercises, flashcards, and quizzes as the course develops.
+5. The LLM builds the course: the full course map, then section 1 and its first lesson in place of `01 Section Template`, and it asks lesson 1's first question in the same reply.
+6. It writes each later lesson when you reach it, the lesson's flashcards when you've studied it, and a section's exercises and quiz once you've studied all its lessons (Planned Lessons in `AGENTS.md`). Ask it to write the rest now if you want the whole course at once.
+7. Update `CONTEXT.md` as terms and boundaries become clear.
+8. Add glossary terms only when requested or when a term needs a stable learner-facing definition.
 
 ## Post-Copy Placeholder Sweep
 
@@ -60,6 +60,8 @@ Inside each numbered section, number the lessons in order:
 01a NULL Values.md
 02 Left Join.md
 ```
+
+The course map lists every lesson from the start. A lesson that isn't written yet is plain text there, not a link, and gets its file when the learner reaches it, under the same number and title.
 
 A letter after the number marks a bridge lesson, which the tutor offers during study when the learner lacks a prerequisite, and adds when the learner agrees (Bridge Lessons in `AGENTS.md`). Lessons are never renumbered to make room.
 

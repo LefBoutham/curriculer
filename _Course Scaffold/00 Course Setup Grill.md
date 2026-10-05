@@ -10,6 +10,7 @@ Use this note with an LLM to set up a course before building it. Keep it short a
 - Ask the Starting Level first, then the Purpose.
 - After those two, offer to build right away, for example with the reply "Just create the course". If the learner takes it, ask nothing more: assume every answer still open, and build.
 - Otherwise, ask about Sources only when `_attachments/` holds no source files yet. Then propose the Section Plan, and build when the learner agrees.
+- To build, follow Planned Lessons in the course's `AGENTS.md`: write the map and lesson 1, then start lesson 1 and ask its first question in the same reply. Write the other lessons when the learner reaches them.
 - Never ask the Defaults. Give each one its recommended answer, fitted to the goal and the answers so far.
 - Write every answer under Current Defaults at the end of this note, and in its `CONTEXT.md` Course Contract field when it has one. End each answer the learner didn't give with "(assumed by the tutor)".
 - Mention the assumed answers in one sentence, for example: "I used the usual choices for lesson size, quizzes and reviews; say if you'd like any changed."

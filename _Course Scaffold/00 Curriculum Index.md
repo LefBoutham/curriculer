@@ -24,6 +24,8 @@ One-sentence description of the course outcome.
 
 ## Sections
 
+Every section, and under it every lesson, in the order they are taught. A section or lesson that isn't written yet is plain text, such as `- 02 Left Join`, not a link: the tutor writes it when the learner reaches it, then links it here.
+
 - [[01 Section Template/00 Section Index|01 Section Template]]
 
 ## Curriculum Graph
