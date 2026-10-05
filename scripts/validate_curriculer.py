@@ -89,6 +89,7 @@ def main() -> int:
         else:
             errors.extend(check_course_placeholders(args.course))
             errors.extend(check_course_lessons(args.course))
+            errors.extend(check_course_map(args.course))
             if args.since:
                 errors.extend(check_lessons_kept(args.course, args.since))
 
@@ -402,6 +403,65 @@ def check_course_lessons(course: Path) -> list[str]:
             if "## Curriculum Graph" in course_index and stem not in course_index:
                 errors.append(f"{index}: add bridge lesson {stem!r} to the Prerequisites cell of the {section.name!r} row in the Curriculum Graph")
     return errors
+
+
+# A list item and its indent: `- 02 Left Join`, or `  - [[01 Basics/01 Tables And Rows|…]]` under a section.
+LIST_ITEM_RE = re.compile(r"^(\s*)[-*+]\s+(.+?)\s*$")
+# A section or lesson named in plain text, as a planned one is: `02 Left Join`.
+PLANNED_RE = re.compile(r"^\d{2}[a-z]? [^\[\]]+$")
+
+
+def check_course_map(course: Path) -> list[str]:
+    """In the course map and the section indexes, a written lesson is a link and a planned one is plain text (Planned Lessons in AGENTS.md)."""
+    errors: list[str] = []
+    index = course / "00 Curriculum Index.md"
+    if not course.is_dir() or not index.is_file():
+        return errors
+    files = {path.relative_to(course).as_posix() for path in course.rglob("*") if path.is_file()}
+    pages = [(index, "Sections")]
+    pages += [(section / SECTION_INDEX, "Lessons") for section in sorted(course.iterdir()) if section.is_dir() and SECTION_RE.match(section.name)]
+    for page, heading in pages:
+        if not page.is_file():
+            continue
+        # A lesson in the map is listed under its section; one in a section index, in that section.
+        folder = page.parent
+        for depth, item in list_items(strip_code_fences(page.read_text(encoding="utf-8")), heading):
+            target = link_target(item)
+            if heading == "Sections" and depth == 0:
+                folder = course / (target.split("/", 1)[0] if target else item)
+            if target is not None:
+                if LESSON_RE.match(f"{target.rsplit('/', 1)[-1]}.md") and not in_course(files, course, page.parent, target):
+                    errors.append(f"{page}: {item} links a lesson that isn't written; write it, or list it as plain text while it's planned")
+            elif PLANNED_RE.match(item) and (folder / (SECTION_INDEX if heading == "Sections" and depth == 0 else f"{item}.md")).is_file():
+                errors.append(f"{page}: {item!r} is written; make it a link")
+    return errors
+
+
+def list_items(text: str, heading: str) -> list[tuple[int, str]]:
+    """The list items under `## heading`, up to the next heading, with 0 for a top-level item."""
+    items: list[tuple[int, str]] = []
+    inside = False
+    for line in text.splitlines():
+        if line.startswith("#"):
+            inside = line.strip() == f"## {heading}"
+            continue
+        match = LIST_ITEM_RE.match(line) if inside else None
+        if match:
+            items.append((0 if not match.group(1) else 1, match.group(2)))
+    return items
+
+
+def link_target(item: str) -> str | None:
+    """The note an item's first wiki link points to, without alias, heading or `.md`."""
+    match = WIKI_LINK_RE.search(item)
+    return match.group(1).split("|", 1)[0].split("#", 1)[0].strip().removesuffix(".md") if match else None
+
+
+def in_course(files: set[str], course: Path, base: Path, target: str) -> bool:
+    """Whether a link resolves as Obsidian would: next to the page, or anywhere in the course by its path (`02 Joins/01 Inner Join`) or, without a folder, by its name."""
+    rel = base.relative_to(course).as_posix()
+    near = f"{rel}/{target}.md" if rel != "." else f"{target}.md"
+    return near in files or any(file == f"{target}.md" or file.endswith(f"/{target}.md") for file in files)
 
 
 def link_stem(raw: str) -> str:

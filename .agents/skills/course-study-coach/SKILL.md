@@ -22,7 +22,7 @@ The learner must attempt retrieval at least once before receiving clues, explana
 2. **Find where the learner left off.**
    - Inspect the course curriculum index, section indexes, lesson frontmatter, and reviewable artifact frontmatter.
    - Treat YAML frontmatter as the source of truth. Use review dashboards only as query hints.
-   - Use lesson progress frontmatter as the checkpoint source of truth. Prefer the highest ordered lesson with `study_status: studied` and continue from the next lesson unless the learner asks for review or a different point.
+   - Use lesson progress frontmatter as the checkpoint source of truth. Prefer the highest ordered lesson with `study_status: studied` and continue from the next lesson in the course map unless the learner asks for review or a different point. The next lesson may be planned: listed in the map as plain text, with no file yet.
    - Prefer due or overdue reviews before new lessons unless the learner explicitly asks to move forward or stop revision.
    - If nothing is due, suggest the next incomplete lesson or lowest-confidence reviewable artifact, grouped by section.
    - If the next lesson starts a new section, run the Prerequisite Check (under New Lessons) before you suggest it.
@@ -92,12 +92,15 @@ When several items are due, interleave them: mix older review, newer review, wea
 ## New Lessons
 
 1. If the lesson starts a new section, run the prerequisite check first.
-2. Check the lesson's prerequisites with a quick retrieval prompt.
-3. Teach with the lesson's worked example, one step at a time, or give the minimum effective explanation. If the learner can already do this kind of task, go straight to practice.
-4. Move quickly to active practice, including literal syntax prompts when the subject has executable syntax.
-5. Use corrections and retries instead of extended exposition.
-6. When the learner has covered a lesson, update that lesson's progress frontmatter.
-7. Stop before cognitive overload; leave a clear next step.
+2. If the lesson is planned, write it now, in this turn, as Planned Lessons in the course's `AGENTS.md` says: under its planned number and title, then linked in the map and its section index. If the course's `AGENTS.md` has no Planned Lessons section, use the one in `_Course Scaffold/AGENTS.md`. Write only this lesson, and keep it short.
+3. Check the lesson's prerequisites with a quick retrieval prompt.
+4. Teach with the lesson's worked example, one step at a time, or give the minimum effective explanation. If the learner can already do this kind of task, go straight to practice.
+5. Move quickly to active practice, including literal syntax prompts when the subject has executable syntax.
+6. Use corrections and retries instead of extended exposition.
+7. When the learner has covered a lesson, update that lesson's progress frontmatter and add its flashcards. When that was the last lesson of its section, write the section's exercises and quiz if it has none, and offer them (Planned Lessons).
+8. Stop before cognitive overload; leave a clear next step.
+
+When the learner asks to write the rest of the course now, write every planned lesson, flashcard set, exercise set and quiz, as "The rest at once" in Planned Lessons says, then go on from where they left off.
 
 Beginners get direct instruction, worked examples, and smaller steps. More advanced learners get fewer hints and more scenario-based prompts.
 
@@ -174,4 +177,4 @@ When updating metadata, write only inside the selected copied course folder.
 
 ## Session Close
 
-End with what was reviewed or learned, observed weak spots, metadata changes made, lessons linked, bridge lessons added or declined, other repair signals recorded or proposed, and the next recommended study action. If a prerequisite check ran, say which sets were weak and whether you reviewed them first or the learner chose to go straight on. Keep it short.
+End with what was reviewed or learned, observed weak spots, metadata changes made, lessons written or linked, bridge lessons added or declined, other repair signals recorded or proposed, and the next recommended study action. If a prerequisite check ran, say which sets were weak and whether you reviewed them first or the learner chose to go straight on. Keep it short.

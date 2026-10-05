@@ -109,6 +109,81 @@ class CourseLessons(unittest.TestCase):
         self.assertIn("cannot read the course", validate.check_lessons_kept(self.course, "HEAD")[0])
 
 
+MAP = """# SQL
+
+## Sections
+
+Every section, and under it every lesson. A section or lesson that isn't written yet is plain text, such as `- 02 Left Join`.
+
+- [[01 Basics/00 Section Index|01 Basics]]
+  - [[01 Basics/01 Tables And Rows|01 Tables And Rows]]
+  - 02 Selecting Columns
+- 02 Joins
+  - 01 Inner Join
+  - 02 Left Join
+
+## Study Tools
+
+- [[00 Review Dashboard|Review Dashboard]]
+"""
+
+SECTION = """# 01 Basics
+
+## Lessons
+
+- [[01 Tables And Rows|Tables And Rows]]
+- 02 Selecting Columns
+
+## Study
+
+- None yet.
+"""
+
+
+class CourseMap(unittest.TestCase):
+    """Planned lessons: listed in the map as plain text, written when the learner reaches them."""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.course = Path(self.tmp.name) / "SQL"
+        write(self.course / "00 Curriculum Index.md", MAP)
+        write(self.course / "01 Basics" / "00 Section Index.md", SECTION)
+        write(self.course / "01 Basics" / "01 Tables And Rows.md", LESSON.format(title="Tables And Rows"))
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def errors(self) -> str:
+        return "\n".join(validate.check_course_map(self.course) + validate.check_course_lessons(self.course))
+
+    def test_planned_lessons_and_sections_pass(self) -> None:
+        self.assertEqual(self.errors(), "")
+
+    def test_a_link_to_an_unwritten_lesson_fails(self) -> None:
+        index = self.course / "00 Curriculum Index.md"
+        write(index, MAP.replace("  - 02 Selecting Columns", "  - [[01 Basics/02 Selecting Columns|02 Selecting Columns]]"))
+        self.assertIn("links a lesson that isn't written", self.errors())
+        write(index, MAP.replace("- 02 Joins", "- [[02 Joins/00 Section Index|02 Joins]]"))
+        self.assertIn("links a lesson that isn't written", self.errors())
+
+    def test_a_written_lesson_is_a_link(self) -> None:
+        write(self.course / "01 Basics" / "02 Selecting Columns.md", LESSON.format(title="Selecting Columns"))
+        errors = self.errors()
+        self.assertIn("00 Curriculum Index.md: '02 Selecting Columns' is written; make it a link", errors)
+        self.assertIn("00 Section Index.md: '02 Selecting Columns' is written; make it a link", errors)
+        for name, old, new in [
+            ("00 Curriculum Index.md", "  - 02 Selecting Columns", "  - [[01 Basics/02 Selecting Columns|02 Selecting Columns]]"),
+            ("01 Basics/00 Section Index.md", "- 02 Selecting Columns", "- [[02 Selecting Columns|Selecting Columns]]"),
+        ]:
+            path = self.course / name
+            write(path, path.read_text(encoding="utf-8").replace(old, new))
+        self.assertEqual(self.errors(), "")
+
+    def test_a_written_section_is_a_link(self) -> None:
+        write(self.course / "02 Joins" / "00 Section Index.md", "# 02 Joins\n\n## Lessons\n\n- 01 Inner Join\n- 02 Left Join\n")
+        self.assertIn("'02 Joins' is written; make it a link", self.errors())
+
+
 class CoursePlaceholders(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
