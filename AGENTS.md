@@ -45,6 +45,8 @@ Follow the course-level `AGENTS.md` when one exists. If a course does not have o
 
 A lesson the course map lists as plain text is planned: the skill writes it when the learner reaches it, and then teaches it. When the learner asks for the whole course at once, it writes the rest now.
 
+Before the first lesson of a new section, the skill checks the review state of the sections it builds on. From the second section on, it then gives a short section opener: where the section sits, its question and its parts, and a question for lesson 1 that the learner tries first. The rules are under Prerequisite Check and Section Opener in `_Course Scaffold/AGENTS.md`.
+
 Use the repo-scoped `course-study-coach` skill in `.agents/skills/course-study-coach/` for LLM-led study sessions, reviews, exercises, study sets, quizzes, diagnostic starting-point checks, active-recall tutoring, and review metadata updates.
 
 When a learner lacks a prerequisite that no lesson teaches, the skill offers to add one short bridge lesson, such as `01a NULL Values.md`, with a few flashcards, and adds it when the learner agrees. Repairs only add: they never renumber, rename, move, or delete a lesson. The rules are under Bridge Lessons in `_Course Scaffold/AGENTS.md`.
