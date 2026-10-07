@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.10.1
+
+- **A check for course repairs.** `scripts/eval_bridge_lesson.py` plays a learner who taps "I don't understand the question or what it builds on" on a short synthetic course, with Claude Code as the tutor. It passes when the tutor offers a bridge lesson before adding one, adds it once the learner agrees, places and links it so the course check passes, and keeps every lesson: no renumbering, renaming, moving or deleting. Run it after changing Repairing The Course or Bridge Lessons, as `CONTRIBUTING.md` says. `scripts/test_eval_bridge_lesson.py` tests its checks with a scripted tutor, and checks that the skill and `_Course Scaffold/AGENTS.md` still say to offer first and only add.
+
+Upgrading an existing learning workspace: nothing to do. The check is in this repo's `scripts/`.
+
 ## v0.10.0
 
 - **A section opener.** A learner who starts a section cold meets its new names and its first hard idea at once. So from a course's second section on, once the prerequisite check is done, the tutor opens the section in about five short sentences: where it sits in the course map and what it builds on, the question it answers, its main parts by name, how its lessons connect, and a question that lesson 1 will answer, for the learner to try first. A wrong try is expected, and lesson 1 shows the answer. There is no opener in section 1 or in a section already started, and the learner can skip it. It draws on pre-training, advance organisers and the pretesting effect. The rules are in a new Section Opener section of the skill and of `_Course Scaffold/AGENTS.md`. An app with its own section intro, such as a narrated one, follows its own rules instead.
