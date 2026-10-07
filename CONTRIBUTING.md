@@ -23,6 +23,14 @@ python3 -m unittest discover -s scripts
 
 Before opening a change, also inspect `_Course Scaffold/01 Section Template/quizes/Quiz.html` in a browser when quiz behavior changes.
 
+When you change Repairing The Course in the skill or Bridge Lessons in `_Course Scaffold/AGENTS.md`, also run:
+
+```sh
+python3 scripts/eval_bridge_lesson.py
+```
+
+It needs Claude Code, signed in. It plays a learner who can't follow a question on a short synthetic course, and passes when the tutor offers a bridge lesson, adds it only once the learner agrees, and never renumbers, renames, moves, or deletes a lesson. It costs a few agent turns, so the unit tests only check its checks, with a scripted tutor.
+
 ## ADRs
 
 Use `_Course Scaffold/docs/adr/` only for decisions that are hard to reverse, surprising without context, and the result of a real trade-off.

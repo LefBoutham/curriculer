@@ -68,6 +68,8 @@ def main() -> int:
 
     root = Path(tempfile.mkdtemp(prefix="curriculer-eval-"))
     talk: Talk = []
+    failures: list[str] = []
+    problem = ""
     try:
         course, start = make_workspace(root / "workspace")
         (root / "learner").mkdir()
@@ -75,7 +77,6 @@ def main() -> int:
         learner = claude_learner(root / "learner", args.learner_model)
         failures = converse(tutor, learner, course, start, talk, args.turns)
     except AgentError as error:
-        failures = None
         problem = str(error)
     finally:
         for who, text in talk:
@@ -85,7 +86,7 @@ def main() -> int:
         else:
             shutil.rmtree(root)
 
-    if failures is None:
+    if problem:
         print(f"Could not run the eval: {problem}", file=sys.stderr)
         return 2
     if failures:
