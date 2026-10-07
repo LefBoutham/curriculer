@@ -196,6 +196,14 @@ confidence: 2
 
 `02 Relational Modeling/exercises/Exercises.md` is `not started`, so it is skipped. The quiz is weak (confidence 2), and the flashcards are overdue. The tutor asks a few questions from the quiz, then from the flashcards, updates both sets, and then starts the lesson. The session close says: "Before Joins: reviewed the Relational Modeling quiz (confidence 2) and the overdue Tables And Rows flashcards."
 
+## Section Opener
+
+After that review, before `03 Joins/01 Inner Join`, the tutor opens the section:
+
+> You've just recalled how a foreign key points from one table to another. Joins is about the question that raises: how do you read rows from both tables at once? It has three parts: the join condition, the inner join, and the outer join, which keeps rows with no match. Each lesson keeps one more kind of row than the last. To start: an order whose `customer_id` is empty, does an inner join of orders and customers show it?
+
+The learner says yes. The tutor says that lesson 1 shows why not, and starts it.
+
 ## Bridge Lesson
 
 In `03 Joins/02 Left Join`, the tutor asks what a left join returns for a customer with no orders. The learner answers with the reply "I don't understand the question or what it builds on".

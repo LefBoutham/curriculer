@@ -25,7 +25,7 @@ The learner must attempt retrieval at least once before receiving clues, explana
    - Use lesson progress frontmatter as the checkpoint source of truth. Prefer the highest ordered lesson with `study_status: studied` and continue from the next lesson in the course map unless the learner asks for review or a different point. The next lesson may be planned: listed in the map as plain text, with no file yet.
    - Prefer due or overdue reviews before new lessons unless the learner explicitly asks to move forward or stop revision.
    - If nothing is due, suggest the next incomplete lesson or lowest-confidence reviewable artifact, grouped by section.
-   - If the next lesson starts a new section, run the Prerequisite Check (under New Lessons) before you suggest it.
+   - If the next lesson starts a new section, run the Prerequisite Check (under New Lessons) before you suggest it, and from the course's second section on, give the Section Opener after it.
    - If the course has weak metadata, state the likely starting point and ask the learner to confirm.
 
 3. **Ground the starting level when uncertain.**
@@ -85,13 +85,13 @@ Add at most one bridge lesson per confirmed gap. Never renumber, rename, move, o
 2. Due exercise, study-set, or quiz review.
 3. Mistakes recorded in `notes`.
 4. Lowest-confidence reviewable artifact, grouped by section.
-5. Next lesson in the curriculum, after the prerequisite check when it starts a new section.
+5. Next lesson in the curriculum, after the prerequisite check and the section opener when it starts a new section.
 
 When several items are due, interleave them: mix older review, newer review, weak spots, and one transfer/application prompt.
 
 ## New Lessons
 
-1. If the lesson starts a new section, run the prerequisite check first.
+1. If the lesson starts a new section, run the prerequisite check first. From the course's second section on, then give the section opener.
 2. If the lesson is planned, write it now, in this turn, as Planned Lessons in the course's `AGENTS.md` says: under its planned number and title, then linked in the map and its section index. If the course's `AGENTS.md` has no Planned Lessons section, use the one in `_Course Scaffold/AGENTS.md`. Write only this lesson, and keep it short.
 3. Check the lesson's prerequisites with a quick retrieval prompt.
 4. Teach with the lesson's worked example, one step at a time, or give the minimum effective explanation. If the learner can already do this kind of task, go straight to practice.
@@ -114,6 +114,18 @@ A lesson starts a new section when no lesson in that section has `study_status: 
 4. If the learner asks to go straight to the lesson, do so.
 
 Say what the check found in the session close.
+
+### Section Opener
+
+A learner who starts a section cold meets its new names and its first hard idea at once. So from the course's second section on, once the prerequisite check is done, with its review if it found weak sets, open the section in a few sentences before lesson 1:
+
+1. Where the section sits in the course map, and what it builds on. Link it to what the check just recalled.
+2. The question the section answers, and why it matters.
+3. Its main parts, each named in a few words, so their names are known before lesson 1 uses them.
+4. How its lessons connect.
+5. A question that lesson 1 will answer, for the learner to try now.
+
+Keep it to about five short sentences, then the question. A wrong try or "I don't know" is expected: don't give the answer, say that lesson 1 shows it, and start lesson 1. Give no opener in section 1, which starts when the course is built, or in a section the learner has already started. If the learner asks to skip it, start lesson 1. When an app you run in has its own section intro, follow the app's rules for it instead.
 
 ## Lesson Progress Metadata
 

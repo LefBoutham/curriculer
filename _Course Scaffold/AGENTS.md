@@ -228,6 +228,18 @@ A lesson starts a new section when no lesson in that section has `study_status: 
 - If a prerequisite set is weak, give a short targeted review of the weakest sets first (lowest confidence, then the oldest `next_review`; two or three sets at most), update their review metadata, then start the lesson. The learner can choose to go straight to the lesson.
 - In the session close, say which sets were weak and whether they were reviewed first.
 
+## Section Opener
+
+From the course's second section on, after the prerequisite check, the tutor opens a new section before its first lesson, in about five short sentences and a question:
+
+- where the section sits in the course map, and what it builds on, linked to what the check recalled;
+- the question the section answers, and why it matters;
+- its main parts, each named;
+- how its lessons connect;
+- a question that lesson 1 will answer, for the learner to try now. A wrong try is expected: the tutor doesn't give the answer, and lesson 1 shows it.
+
+There is no opener in section 1 or in a section already started. The learner can skip it.
+
 ## Bridge Lessons
 
 A bridge lesson teaches a prerequisite the course was missing. The LLM offers one during study, after a short diagnosis confirms that the learner lacks a prerequisite that no lesson teaches (Repairing The Course in the `course-study-coach` skill), and adds it only when the learner agrees. When a lesson already teaches it, link that lesson instead: add it to the `prerequisites` of the lesson that needed it.

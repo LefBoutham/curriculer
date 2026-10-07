@@ -119,7 +119,9 @@ Then:
    map, writes the first lesson, and asks its first question, a few minutes
    later. It writes each later lesson when you reach it. Ask it to write the
    rest now if you want the whole course at once.
-4. Use `course-study-coach` to learn, practice, review, and take quizzes.
+4. Use `course-study-coach` to learn, practice, review, and take quizzes. When
+   you reach a new section, it first checks the sections it builds on, then
+   opens it in a few sentences and a question that its first lesson answers.
 5. Let the agent update progress and review dates from study evidence.
 
 Example prompts:

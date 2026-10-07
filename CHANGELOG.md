@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.10.0
+
+- **A section opener.** A learner who starts a section cold meets its new names and its first hard idea at once. So from a course's second section on, once the prerequisite check is done, the tutor opens the section in about five short sentences: where it sits in the course map and what it builds on, the question it answers, its main parts by name, how its lessons connect, and a question that lesson 1 will answer, for the learner to try first. A wrong try is expected, and lesson 1 shows the answer. There is no opener in section 1 or in a section already started, and the learner can skip it. It draws on pre-training, advance organisers and the pretesting effect. The rules are in a new Section Opener section of the skill and of `_Course Scaffold/AGENTS.md`. An app with its own section intro, such as a narrated one, follows its own rules instead.
+- Added a **Section Opener** entry to `CONTEXT.md`, and a Section Opener example to `docs/examples.md`.
+
+Upgrading an existing learning workspace: replace its `.agents/skills/course-study-coach/` and `_Course Scaffold/` with this version. A course's own `AGENTS.md` wins over the skill, so also copy the new Section Opener section from `_Course Scaffold/AGENTS.md` into each course's `AGENTS.md`, after its Prerequisite Check, and the Section Opener entry into each course's `CONTEXT.md`. Add the new paragraph under Study And Review Conventions to the workspace's root `AGENTS.md`.
+
 ## v0.9.0
 
 - **The first lesson in minutes.** Building a course used to write every section's lessons, exercises, flashcards and quizzes before the first question, which took 13 to 17 minutes. Now the build writes the course contract, the source list, the full course map, section 1's index and lesson 1, then starts lesson 1 and asks its first question in the same reply. The plan is still made in full: every section and lesson, in prerequisite order, with confusable concepts apart.
