@@ -31,6 +31,10 @@ python3 scripts/eval_bridge_lesson.py
 
 It needs Claude Code, signed in. It plays a learner who can't follow a question on a short synthetic course, and passes when the tutor offers a bridge lesson, adds it only once the learner agrees, and never renumbers, renames, moves, or deletes a lesson. It costs a few agent turns, so the unit tests only check its checks, with a scripted tutor.
 
+## Releases
+
+When a release changes what a learning workspace holds, say how to upgrade under its `CHANGELOG.md` entry, and make `scripts/upgrade_workspace.py` do it. The skill and `_Course Scaffold/` are replaced whole, so they need nothing. A new rule section that courses copy goes in `COURSE_SECTIONS`, its `CONTEXT.md` entry in `CONTEXT_ENTRIES`, and a changed line of the root `AGENTS.md` in `ROOT_LINES`, with the start of its older text. The tests check that each step still finds its text in the release.
+
 ## ADRs
 
 Use `_Course Scaffold/docs/adr/` only for decisions that are hard to reverse, surprising without context, and the result of a real trade-off.
