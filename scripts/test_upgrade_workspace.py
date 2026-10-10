@@ -227,8 +227,10 @@ class UpgradeTest(unittest.TestCase):
         empty = Path(self.tmp.name) / "empty"
         empty.mkdir()
         self.assertEqual(run(str(empty)).returncode, 2)
+        (empty / "AGENTS.md").write_text("# A code project\n", encoding="utf-8")
+        self.assertEqual(run(str(empty)).returncode, 2)
         self.assertEqual(run(str(ROOT)).returncode, 2)
-        self.assertEqual(list(empty.iterdir()), [])
+        self.assertEqual([path.name for path in empty.iterdir()], ["AGENTS.md"])
 
     def test_a_copied_skill_for_claude_code_stays_a_copy(self) -> None:
         link = self.workspace / upgrade.LINK

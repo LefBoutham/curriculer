@@ -362,8 +362,8 @@ def main() -> int:
     if workspace == ROOT:
         print("That is Curriculer itself. Give the path of a learning workspace.", file=sys.stderr)
         return 2
-    if not any((workspace / path).exists() for path in [SKILL, OLD_SKILL, SCAFFOLD, Path("AGENTS.md")]):
-        print(f"{workspace} doesn't look like a learning workspace: it has no skill, scaffold or AGENTS.md.", file=sys.stderr)
+    if not any((workspace / path).exists() for path in [SKILL, LINK, OLD_SKILL, SCAFFOLD]):
+        print(f"{workspace} doesn't look like a learning workspace: it has no course-study-coach skill or _Course Scaffold/.", file=sys.stderr)
         return 2
 
     version = release()
