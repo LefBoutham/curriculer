@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.11.0
+
+- **An upgrade command.** `python3 scripts/upgrade_workspace.py /path/to/learning-workspace` brings a learning workspace up to this release, following the upgrade steps below. It replaces the skill and `_Course Scaffold/`, refreshes the `.claude/skills/` link or copy, and removes the old `.codex/skills/` copy. In the root `AGENTS.md`, it updates the setup steps and study paragraphs that releases changed. In each course, it brings the rule sections that releases asked you to copy, Building Lessons, Review Rules, Prerequisite Check, Section Opener and Bridge Lessons, and their `CONTEXT.md` entries up to date. It never touches a course's other sections, its lessons, flashcards, exercises or quizzes, or review dates. It backs up what it changes in the workspace's `.curriculer/backups/`, says what it changed and what is left for you, and records the release in `.curriculer/version`. A second run finds nothing to do. `--check` reports without changing anything, and `--commit` commits the upgrade, and only the upgrade, in the workspace's Git repository.
+- `scripts/test_upgrade_workspace.py` tests it on a workspace an old release left, and checks that each step still finds its text in this release.
+
+Upgrading an existing learning workspace: run `python3 scripts/upgrade_workspace.py /path/to/learning-workspace` from this release. It does the steps of every release since v0.2.0. A rule section you changed in a course's `AGENTS.md` is replaced too, and its old text is in the backup.
+
 ## v0.10.1
 
 - **A check for course repairs.** `scripts/eval_bridge_lesson.py` plays a learner who taps "I don't understand the question or what it builds on" on a short synthetic course, with Claude Code as the tutor. It passes when the tutor offers a bridge lesson before adding one, adds it once the learner agrees, places and links it so the course check passes, and keeps every lesson: no renumbering, renaming, moving or deleting. Run it after changing Repairing The Course or Bridge Lessons, as `CONTRIBUTING.md` says. `scripts/test_eval_bridge_lesson.py` tests its checks with a scripted tutor, and checks that the skill and `_Course Scaffold/AGENTS.md` still say to offer first and only add.

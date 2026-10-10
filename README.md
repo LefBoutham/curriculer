@@ -100,8 +100,8 @@ cp -R "_Course Scaffold" "/path/to/learning-workspace/My Course"
 ```
 
 On Windows, a link needs Developer Mode or an administrator shell. Instead of
-the `ln -s` line, copy the skill folder into `.claude/skills/` as well, and
-replace both copies when you upgrade.
+the `ln -s` line, copy the skill folder into `.claude/skills/` as well. The
+upgrade command below keeps both copies up to date.
 
 Open your agent at the workspace root, the folder that holds `.agents/`,
 `.claude/` and your course folders, so it finds the skill and sees every course.
@@ -131,6 +131,19 @@ Build this course from my goal and source files.
 Find where I left off and start the next useful task.
 Quiz me on due material and update my review data.
 ```
+
+To upgrade a learning workspace to a new release, update this repository and run:
+
+```sh
+python3 scripts/upgrade_workspace.py "/path/to/learning-workspace"
+```
+
+It replaces the skill and the workspace's `_Course Scaffold/`, and brings the
+rules each course copied up to date, as the [changelog](CHANGELOG.md) says. It
+never changes your lessons, cards, quizzes or review dates. It backs up what it
+changes in the workspace's `.curriculer/backups/` and says what it changed. Add
+`--check` to see what it would change first, or `--commit` to commit the upgrade
+in the workspace's Git repository.
 
 Do not create real courses inside this base repository. Copy the scaffold first.
 
